@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+  <head>
+    <title>EST - Epic Skill Time</title>
+    <link rel="stylesheet" type="text/css" href="./styles.css" />
+    <script type="text/javascript" src="./scripts.js"></script>
+    <script type="text/javascript">
+      var env = window.location.href.indexOf('epicskilltime.') > -1 ? 'prod' : 'dev'
+        , domain = env == 'prod' ? 'http://epicskilltime.airhost.me' : 'http://localhost:1337/epicskilltime'
+        , APIdomain = env == 'prod' ? 'http://epicskilltime.herokuapp.com' : 'http://localhost:7777'
+
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div id="header">
+        <div id="logo"></div>
+        <div id="search">
+          <input id="searchbox" placeholder="Search for #tags"></input>
+        </div>
+        <div id="random">
+          <button>ADD GIF</button>
+        </div>
+      </div>
+      <div>
+        <form id="add-form" method="post">
+          <fieldset>
+            <label>
+              Gfycat URL (only gfycat for now)
+            </label>
+            <input autofocus name="url" type="text" />
+          </fieldset>
+          <fieldset>
+            <label>
+              Game
+            </label>
+            <input name="game" type="text" />
+          </fieldset>
+          <fieldset>
+            <label>
+              Event
+            </label>
+            <input name="evt" placeholder="optional" type="text" />
+          </fieldset>
+          <fieldset>
+            <label>
+              Team(s)
+            </label>
+            <input name="teams" placeholder="optional - separate with commas" type="text" />
+          </fieldset>
+          <fieldset>
+            <label>
+              Player(s)
+            </label>
+            <input name="players" placeholder="optional - separate with commas" type="text" />
+          </fieldset>
+          <fieldset>
+            <label>
+              Character(s)
+            </label>
+            <input name="characters" placeholder="optional - separate with commas" type="text" />
+          </fieldset>
+          <fieldset>
+            <label>
+              Free tags
+            </label>
+            <input name="free" placeholder="optional - separate with commas" type="text" />
+          </fieldset>
+          <fieldset style="text-align: center;">
+            <input type="submit" name="submit" value="Add GIF" /><br>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+    <script type="text/javascript" src="./listeners.js"></script>
+    <script type="text/javascript">
+      document.getElementById('add-form').action = APIdomain + '/add'
+    </script>
+  </body>
+</html>

@@ -1,0 +1,222 @@
+html, body {
+  margin: 0;
+  height: 100%;
+}
+
+ul, ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+input[type=submit], button {
+  border-radius: .5rem;
+  font-size: 18px;
+  font-family: 'Lato',sans-serif;
+  background: #000000;
+  color: white;
+  font-weight: 400;
+  padding: 8px 20px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  border: none;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  border-bottom-color: #666666;
+  /*border-bottom-color: rgb(25, 75, 2);*/
+  cursor: pointer;
+  width: auto;
+  outline: 0;
+}
+
+input[type=submit]:active, input[type=submit]:focus, button:active, button:focus {
+  border-bottom: 1px solid #194ba3;
+  margin-top: 3px;
+}
+
+fieldset {
+  border: none;
+}
+
+fieldset label {
+  display: block;
+  margin-left: 10px;
+}
+
+fieldset input[type=text] {
+  line-height: 20px;
+  font-size: 16px;
+  padding: 5px;
+  width: 300px;
+}
+
+.container {
+  width: 1200px;
+  margin: 0 auto;
+  font-family: Open Sans, sans-serif;
+}
+
+#header {
+  overflow: hidden;
+  width: 100%;
+  margin: 30px 0;
+}
+
+#logo {
+  float: left;
+  height: 188px;
+  width: 25%;
+  background-image: url('./est.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+#search {
+  float: left;
+  width: 50%;
+  line-height: 188px;
+}
+
+/* blue palette with #439fe0 */
+
+#searchbox {
+  height: 35px;
+  width: 300px;
+  border-radius: 20px;
+  border: 2px solid #000000;
+  outline: 0;
+  padding: 0 20px;
+  font-size: 18px;
+  font-family: Open Sans;
+  margin: 0 30%;
+}
+
+#random {
+  float: left;
+  width: 25%;
+  padding-top: 70px;
+}
+
+#random > button {
+  float: right;
+}
+
+#left {
+  float: left;
+  width: 20%;
+}
+
+#main {
+  float: left;
+  width: 75%;
+}
+
+.card-popular {
+  height: 140px;
+  margin-bottom: 20px;
+  border: 2px solid #000000;
+  width: 90%;
+}
+
+.card-popular-header {
+  line-height: 26px;
+  padding: 5px 20px;
+  background: #000000;
+  color: white;
+}
+
+.card-popular-content li {
+  padding: 2px 10px;
+  cursor: pointer;
+}
+.card-popular-content li:hover {
+  color: white;
+  background-color: #000000;
+}
+
+#gif {
+  position: relative;
+  overflow: hidden;
+}
+
+.gif-li {
+  position: relative;
+  overflow: hidden;
+  width: 600px;
+  margin-bottom: 50px;
+}
+
+.gif-header {
+  position: absolute;
+  width: 96%;
+  padding: 0 2%;
+  height: 40px;
+  line-height: 40px;
+  background-color: rgba(255, 255, 255, 0.6);
+  transition: top .2s linear;
+  z-index: 1;
+}
+
+.arrow {
+  position: absolute;
+  cursor: pointer;
+  top: 200px;
+  width: 80px;
+  height: 80px;
+  background-color: rgba(255, 255, 255, 0.6);
+  transition: left .2s linear, right .2s linear;
+  background-repeat: no-repeat;
+  background-position: 5px 5px;
+  z-index: 1;
+}
+
+.arrow-left {
+  background-image: url('./arrow-left.png');
+}
+
+.arrow-right {
+  background-image: url('./arrow-right.png');
+}
+
+#gif .arrow-left {
+  left: -80px;
+}
+
+#gif:hover .arrow-left {
+  left: 0px;
+}
+
+#gif .arrow-right {
+  right: -80px;
+}
+
+#gif:hover .arrow-right {
+  right: 0px;
+}
+
+#gif .gif-header {
+  top: -40px;
+}
+
+#gif:hover .gif-header {
+  top: 0px;
+}
+
+.tag {
+  height: 20px;
+  padding: 2px 5px;
+  color: white;
+  background-color: #000000;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.tag:hover {
+  color: #000000;
+  background-color: white;
+}
+
+#add-form {
+  width: 350px;
+  margin: 0 auto;
+}
