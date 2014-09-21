@@ -1,13 +1,8 @@
-@font-face {
-  font-family: Avenir;
-  src: url(Avenir.ttc);
-}
-
 html, body {
   margin: 0;
   height: 100%;
   color: #404241;
-  font-family: Avenir, Open Sans, sans-serif;
+  font-family: Raleway, Open Sans, sans-serif;
 }
 
 ul, ol {
@@ -42,6 +37,7 @@ input[type=submit], button {
   cursor: pointer;
   width: auto;
   outline: 0;
+  font-family: Raleway, Open Sans, sans-serif;
 }
 
 fieldset {
@@ -60,6 +56,7 @@ fieldset input[type=text] {
   width: 450px;
   border: 2px solid #AAA;
   border-radius: 2px;
+  font-family: Raleway, Open Sans, sans-serif;
 }
 
 .muted {
@@ -108,7 +105,7 @@ fieldset input[type=text] {
   outline: 0;
   padding: 0px 20px 0px 40px;
   font-size: 18px;
-  font-family: Avenir, Open Sans, sans-serif;
+  font-family: Raleway, Open Sans, sans-serif;
   background-image: url('./search.svg');
   background-repeat: no-repeat;
   background-size: 28px;
