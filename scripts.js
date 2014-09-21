@@ -13,6 +13,9 @@ window._EST_ = {
     document.addEventListener('click', function (e) {
       if (e.target.className.indexOf("tag") > -1 && e.target.childNodes.length == 1)
         _EST_.search(e.target.textContent)
+
+      if (e.target.parentElement.className.indexOf("-gif") > -1)
+        window.location.href = _EST_.domain + '/gif.html?' + e.target.parentElement.getAttribute('data-id')
     }, false)
 
     // searchboxes
@@ -131,6 +134,7 @@ window._EST_ = {
         video.appendChild(mp4src)
       }
 
+      gifvid.setAttribute('data-id', gif.id)
       gifvid.appendChild(video)
 
       for (var i = 0; i < gif.tags.length; i++) {
@@ -208,7 +212,8 @@ window._EST_ = {
           mp4url: tag.mp4url,
           width: tag.width,
           height: tag.height,
-          title: tag.title
+          title: tag.title,
+          id: tag.gif
         }
       } else {
         gifs[tag.id].tags.push(tag)
