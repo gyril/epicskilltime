@@ -22,20 +22,14 @@
     <div id="main">
       <div class="container">
         <div id="left-column">
-          <h1>Search results</h1>
+          <h1>Gif #<span id="id"></span></h1>
 
         </div>
         <div id="right-column">
           <h1 style="text-align: right">Placeholder</h1>
 
-          <div class="card">
-            <div class="card-title">GAMES</div>
-            <ul>
-              <li><a href="./games.html?game=Dota2">Dota 2</a></li>
-              <li><a href="./games.html?game=LoL">League of Legends</a></li>
-              <li><a href="./games.html?game=SSBM">SSB Melee</a></li>
-              <li><a href="./games.html?game=CSGO">CS:GO</a></li>
-            </ul>
+          <div class="card" id="metadata">
+            
           </div>
 
           <div class="card">
@@ -48,15 +42,13 @@
     <script type="text/javascript">
       _EST_.listen()
       
-      _EST_.searchGifs(window.location.search.substr(1), function (data) {
-        var gifs = _EST_.tagListToGifList(data)
-
-        for (var i in gifs) {
-          var gif = gifs[i]
-
-          document.getElementById("left-column").appendChild(_EST_.templates.list(gif))
-        }
+      _EST_.queryGif(window.location.search.substr(1), function (data) {
+        var gif = _EST_.tagListToGifList(data)[0]
+        document.getElementById("left-column").appendChild(_EST_.templates.list(gif))
+        document.getElementById("metadata").appendChild(_EST_.templates.metadata(_EST_.tagListToTagTypes(gif.tags)))
       })
+
+      document.getElementById("id").textContent = window.location.search.substr(1)
     </script>
   </body>
 </html>

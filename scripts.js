@@ -9,6 +9,13 @@ window._EST_ = {
   },
 
   listen: function () {
+    // tags
+    document.addEventListener('click', function (e) {
+      if (e.target.className.indexOf("tag") > -1 && e.target.childNodes.length == 1)
+        _EST_.search(e.target.textContent)
+    }, false)
+
+    // searchboxes
     var searchboxes = document.getElementsByClassName('searchbox')
 
     for (var i = 0; i < searchboxes.length; i++) {
@@ -16,7 +23,7 @@ window._EST_ = {
 
       sb.addEventListener('keyup', function (e) {
         if (e.keyCode == 13)
-          _EST_.search(sb.value)
+          _EST_.search(this.value)
       }, false)
     }
   },
@@ -24,6 +31,24 @@ window._EST_ = {
   isQuerying: false,
   currentOffset: 0,
   noGifLeft: false,
+
+  queryGif: function (id, callback) {
+    if (this.isQuerying)
+      return
+
+    var xhr = new XMLHttpRequest()
+    xhr.open('GET', this.APIdomain + '/gif/' + id, true)
+    
+    xhr.onload = function(e) {
+      if (this.status == 200) {
+        _EST_.isQuerying = false
+        callback(JSON.parse(this.responseText))
+      }
+    }
+    
+    this.isQuerying = true
+    xhr.send()
+  },
 
   queryGifs: function (options) {
     if (this.isQuerying)
@@ -36,6 +61,24 @@ window._EST_ = {
 
     var xhr = new XMLHttpRequest()
     xhr.open('GET', this.APIdomain + '/list/' + order + '/' + number + '/' + offset, true)
+    
+    xhr.onload = function(e) {
+      if (this.status == 200) {
+        _EST_.isQuerying = false
+        callback(JSON.parse(this.responseText))
+      }
+    }
+    
+    this.isQuerying = true
+    xhr.send()
+  },
+
+  searchGifs: function (query, callback) {
+    if (this.isQuerying)
+      return
+
+    var xhr = new XMLHttpRequest()
+    xhr.open('GET', this.APIdomain + '/search/' + query, true)
     
     xhr.onload = function(e) {
       if (this.status == 200) {
@@ -90,7 +133,7 @@ window._EST_ = {
 
       gifvid.appendChild(video)
 
-      for (var i = gif.tags.length - 1; i >= 0; i--) {
+      for (var i = 0; i < gif.tags.length; i++) {
         var tag = gif.tags[i]
           , tagspan = document.createElement('span')
 
@@ -105,8 +148,8 @@ window._EST_ = {
 
       var link = document.createElement('a')
       link.className = 'gif-list-link'
-      link.href = '#'
-      link.textContent = 'Share'
+      link.href = './gif.html?' + gif.tags[0].gif
+      link.textContent = 'Link'
       links.appendChild(link)
 
       container.appendChild(title)
@@ -114,6 +157,37 @@ window._EST_ = {
       container.appendChild(gifvid)
       container.appendChild(tags)
       container.appendChild(links)
+
+      return container
+    },
+
+    metadata: function (tagtypes) {
+      var container = document.createElement('div')
+
+      for (var i in tagtypes) {
+        var type = document.createElement('div')
+          , contents = document.createElement('div')
+          
+        type.className = 'card-title'
+        type.textContent = i.toUpperCase()
+
+        contents.className = 'metadata-contents'
+
+        for (var j = 0; j < tagtypes[i].contents.length; j++) {
+          if (j > 0)
+            contents.innerHTML += ', '
+
+          var tagContent = tagtypes[i].contents[j]
+            , content = document.createElement('span')
+
+          content.className = 'metadata-tag'
+          content.textContent = tagContent
+          contents.appendChild(content)
+        }
+
+        container.appendChild(type)
+        container.appendChild(contents)
+      }
 
       return container
     }
@@ -146,6 +220,24 @@ window._EST_ = {
 
     // reverse so that they are ordered by id desc
     return array.reverse()
+  },
+
+  tagListToTagTypes: function (tags) {
+    var types = {}
+    
+    for (var i = 0; i < tags.length; i++) {
+      var tag = tags[i]
+
+      if (typeof types[tag.type.toString()] == 'undefined') {
+        types[tag.type.toString()] = {
+          contents: [tag.content]
+        }
+      } else {
+        types[tag.type.toString()].contents.push(tag.content)
+      }
+    }
+
+    return types
   },
 
   infiniteScroll: function () {

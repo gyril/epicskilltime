@@ -223,6 +223,20 @@ fieldset input[type=text] {
   margin-left: 20px;
 }
 
+.card .metadata-contents {
+  margin-left: 20px;
+}
+
+.card .metadata-tag {
+  cursor: pointer;
+  color: #666;
+  text-decoration: none;
+}
+
+.card .metadata-tag:hover {
+  text-decoration: underline;
+}
+
 #add-form {
   width: 500px;
   margin: 0 auto;
