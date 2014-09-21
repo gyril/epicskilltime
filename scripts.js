@@ -1,7 +1,25 @@
 window._EST_ = {
   env: window.location.href.indexOf('epicskilltime.') > -1 ? 'prod' : 'dev',
-  domain: this.env == 'prod' ? 'http://epicskilltime.airhost.me' : 'http://localhost:1337/epicskilltime',
-  APIdomain: this.env == 'prod' ? 'http://epicskilltime.herokuapp.com' : 'http://localhost:7777',
+  domain: '',
+  APIdomain: '', 
+
+  init: function () {
+    this.domain = this.env == 'prod' ? 'http://epicskilltime.airhost.me' : 'http://localhost:1337/epicskilltime'
+    this.APIdomain = this.env == 'prod' ? 'http://epicskilltime.herokuapp.com' : 'http://localhost:7777'
+  },
+
+  listen: function () {
+    var searchboxes = document.getElementsByClassName('searchbox')
+
+    for (var i = 0; i < searchboxes.length; i++) {
+      var sb = searchboxes[i]
+
+      sb.addEventListener('keyup', function (e) {
+        if (e.keyCode == 13)
+          _EST_.search(sb.value)
+      }, false)
+    }
+  },
 
   isQuerying: false,
   currentOffset: 0,
@@ -104,6 +122,7 @@ window._EST_ = {
   tagListToGifList: function (tags) {
 
     var gifs = {}
+      , array = []
 
     for (var i = 0; i < tags.length; i++) {
       var tag = tags[i]
@@ -122,7 +141,11 @@ window._EST_ = {
       }
     }
 
-    return gifs
+    for (var i in gifs)
+      array.push(gifs[i])
+
+    // reverse so that they are ordered by id desc
+    return array.reverse()
   },
 
   infiniteScroll: function () {
@@ -136,7 +159,7 @@ window._EST_ = {
               _EST_.noGifLeft = true
               return
             }
-            
+
             var gifs = _EST_.tagListToGifList(data)
 
             for (var i in gifs) {
@@ -152,6 +175,8 @@ window._EST_ = {
   intervals: [],
 
   search: function (query) {
-    window.location.href = domain + '/search.html?' + query.replace(/ /g, '+')
+    window.location.href = _EST_.domain + '/search.html?' + query.replace(/ /g, '+')
   }
 }
+
+_EST_.init()
