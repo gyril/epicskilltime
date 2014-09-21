@@ -2,95 +2,79 @@
 <meta charset="utf-8">
 
   <head>
-    <title>EST - Epic Skill Time</title>
+    <title>EpicSkillTime</title>
     <link rel="stylesheet" type="text/css" href="./styles.css" />
     <script type="text/javascript" src="./scripts.js"></script>
-    <script type="text/javascript">
-      var env = window.location.href.indexOf('epicskilltime.') > -1 ? 'prod' : 'dev'
-        , domain = env == 'prod' ? 'http://epicskilltime.airhost.me' : 'http://localhost:1337/epicskilltime'
-        , APIdomain = env == 'prod' ? 'http://epicskilltime.herokuapp.com' : 'http://localhost:7777'
-
-      var xhr = new XMLHttpRequest()
-      xhr.open('GET', APIdomain + '/list/latest/1', true)
-      xhr.onload = function(e) {
-        if (this.status == 200) {
-          window.data = JSON.parse(this.responseText)
-          homeGifReady()
-        }
-      }
-      xhr.send()
-    </script>
   </head>
   <body>
-    <div class="container">
-      <div id="header">
-        <div id="logo"></div>
+    <div id="header">
+      <div class="container">
+        <a href="./"><div id="logo">Epic<strong>Skill</strong>Time</div></a>
         <div id="search">
-          <input id="searchbox" placeholder="Search for #tags"></input>
+          <input type="text" class="searchbox" placeholder="Game, player, event..."></input>
         </div>
-        <div id="random">
-          <button>ADD GIF</button>
-        </div>
-      </div>
-      <div id="left">
-        <div class="card-popular">
-          <div class="card-popular-header">
-            Popular games
-          </div>
-          <div class="card-popular-content">
-            <ul>
-              <li>LoL</li>
-              <li>CS:GO</li>
-              <li>Dota2</li>
-              <li>SSBM</li>
-            </ul>
-          </div>
-        </div>
-        <div class="card-popular">
-          <div class="card-popular-header">
-            Popular events
-          </div>
-          <div class="card-popular-content">
-            <ul>
-              <li>LCS</li>
-              <li>TI4</li>
-              <li>TI3</li>
-              <li>TI2</li>
-            </ul>
-          </div>
-        </div>
-        <div class="card-popular">
-          <div class="card-popular-header">
-            Popular players
-          </div>
-          <div class="card-popular-content">
-            <ul>
-              <li>Dendi</li>
-              <li>Dendi</li>
-              <li>Dendi</li>
-              <li>Dendi</li>
-            </ul>
-          </div>
-        </div>
-        <div class="card-popular">
-          <div class="card-popular-header">
-            Popular characters
-          </div>
-          <div class="card-popular-content">
-            <ul>
-              <li>Pudge</li>
-              <li>Pudge</li>
-              <li>Pudge</li>
-              <li>Pudge</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div id="main">
-        <div id="gif">
+        <div id="upload">
+          <a href="./add.html"><button>Upload</button></a>
         </div>
       </div>
     </div>
-    <script type="text/javascript" src="./listeners.js"></script>
+
+    <div id="main">
+      <div class="container">
+        <div id="left-column">
+          <h1>Trending gifs</h1>
+
+          <div class="gif-list card">
+            <div class="gif-list-title">Super Beam Triple Kill</div>
+            <div class="gif-list-game">League of Lesbians</div>
+
+            <div class="gif-list-gif">
+              <video id="gfyVid1" class="gfyVid" width="720" height="406" autoplay loop muted>
+                <source id="webmsource" src="//zippy.gfycat.com/JauntyMeagerEeve.webm" type="video/webm" />
+              </video>
+            </div>
+
+            <div class="gif-list-tags"><span class="gif-list-tag">LoL</span><span class="gif-list-tag">Triple kill</span><span class="gif-list-tag">Fnatic</span></div>
+
+            <div class="gif-list-links"><a href="javascript:alert()" class="gif-list-link">Share</a></div>
+          </div>
+        </div>
+        <div id="right-column">
+          <h1 style="text-align: right">Placeholder</h1>
+
+          <div class="card">
+            <div class="card-title">GAMES</div>
+            <ul>
+              <li><a href="./games.html?game=Dota2">Dota 2</a></li>
+              <li><a href="./games.html?game=LoL">League of Legends</a></li>
+              <li><a href="./games.html?game=SSBM">SSB Melee</a></li>
+              <li><a href="./games.html?game=CSGO">CS:GO</a></li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <input type="text" class="searchbox" placeholder="Game, player, event..."></input>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      _EST_.queryGifs({
+        order: 'latest',
+        number: 10,
+        callback: function (data) {
+          var gifs = _EST_.tagListToGifList(data)
+
+          for (var i in gifs) {
+            var gif = gifs[i]
+
+            document.getElementById("left-column").appendChild(_EST_.templates.list(gif))
+          }
+
+          _EST_.infiniteScroll()
+        }
+      })
+    </script>
   </body>
 </html>
