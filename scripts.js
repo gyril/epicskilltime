@@ -152,8 +152,11 @@ window._EST_ = {
 
       var link = document.createElement('a')
       link.className = 'gif-list-link'
-      link.href = './gif.html?' + gif.tags[0].gif
-      link.textContent = 'Link'
+      link.setAttribute('data-link', _EST_.domain + '/gif.html?' + gif.id)
+      link.addEventListener('click', function () {
+        _EST_.copyLink(this.getAttribute('data-link'))
+      }, false)
+      link.textContent = 'Copy link'
       links.appendChild(link)
 
       container.appendChild(title)
@@ -273,6 +276,10 @@ window._EST_ = {
 
   search: function (query) {
     window.location.href = _EST_.domain + '/search.html?' + query.replace(/ /g, '+')
+  },
+
+  copyLink: function (link) {
+    window.prompt('Copy-paste this link:', link)
   }
 }
 
