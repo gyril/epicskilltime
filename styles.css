@@ -1,6 +1,8 @@
 html, body {
   margin: 0;
   height: 100%;
+  color: #404241;
+  font-family: Open Sans, sans-serif;
 }
 
 ul, ol {
@@ -10,7 +12,7 @@ ul, ol {
 }
 
 a, a:active, a:visited {
-  color: #666;
+  color: #404241;
   text-decoration: none;
 }
 
@@ -20,33 +22,22 @@ a:hover {
 
 h1 {
   text-transform: uppercase;
-  color: #333;
   font-size: 20px;
   font-weight: 900;
   letter-spacing: -1px;
 }
 
 input[type=submit], button {
-  border-radius: .5rem;
+  border-radius: .2rem;
   font-size: 18px;
-  font-family: 'Lato',sans-serif;
-  background: hsl(00, 50%, 50%);
+  background: #f64747;
   color: white;
   font-weight: 400;
   padding: 8px 20px;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
   border: none;
-  border-bottom-width: 2px;
-  border-bottom-style: solid;
-  border-bottom-color: hsl(0, 51%, 21%);
   cursor: pointer;
   width: auto;
   outline: 0;
-}
-
-input[type=submit]:active, input[type=submit]:focus, button:active, button:focus {
-  border-bottom: 1px solid #194ba3;
-  margin-top: 3px;
 }
 
 fieldset {
@@ -78,21 +69,23 @@ fieldset input[type=text] {
 .container {
   width: 1200px;
   margin: 0 auto;
-  font-family: Open Sans, sans-serif;
 }
 
 #header {
-  background-color: yellow;
+  background-color: #fff200;
   padding: 10px 0px;
   overflow: hidden;
   width: 100%;
   line-height: 44px;
+  border-bottom: solid 1px #DDDD00;
+  position: fixed;
+  top: 0;
 }
 
 #logo {
   float: left;
   width: 25%;
-  color: black;
+  color: #404241;
   font-size: 22px;
 }
 
@@ -111,7 +104,7 @@ fieldset input[type=text] {
   outline: 0;
   padding: 0px 20px 0px 40px;
   font-size: 18px;
-  font-family: Open Sans;
+  font-family: Open Sans, sans-serif;
   background-image: url('./search.svg');
   background-repeat: no-repeat;
   background-size: 28px;
@@ -133,8 +126,9 @@ fieldset input[type=text] {
 }
 
 #main {
+  margin-top: 64px;
   padding: 20px 0px;
-  background-color: lightgrey;
+  background-color: #e9e7e8;
   overflow: hidden;
 }
 
@@ -151,7 +145,7 @@ fieldset input[type=text] {
 .card {
   border-radius: 1px;
   background-color: white;
-  box-shadow: 0px 1px 3px 0px black;
+  box-shadow: 0 3px 3px -3px #666;
   padding: 10px;
   margin-bottom: 20px;
 }
@@ -162,15 +156,13 @@ fieldset input[type=text] {
 
 .gif-list-title {
   text-align: center;
-  font: 20px 'Open Sans';
-  color: #666;
+  font-size: 20px;
   font-weight: 700;
 }
 
 .gif-list-game {
   text-align: center;
-  font: 16px 'Open Sans';
-  color: grey;
+  font-size: 16px;
   font-weight: 300;
 }
 
@@ -186,16 +178,15 @@ fieldset input[type=text] {
 .gif-list-tag {
   border-radius: 1px;
   padding: 5px 10px;
-  color: #333;
+  color: #FFF;
   background-color: #AAA;
   cursor: pointer;
-  margin-right:10px;
+  margin-right:5px;
   font-weight: 300;
   font-size: 13px;
 }
 
 .gif-list-tag:hover {
-  color: #AAA;
   background-color: #333;
 }
 
@@ -204,7 +195,6 @@ fieldset input[type=text] {
 }
 
 .gif-list-link {
-  color: #AAA;
   text-decoration: underline;
   font-weight: 300;
   font-size: 14px;
@@ -217,7 +207,6 @@ fieldset input[type=text] {
 
 .card-title {
   font-weight: 700;
-  color: #666;
 }
 
 .card ul {
@@ -230,7 +219,6 @@ fieldset input[type=text] {
 
 .card .metadata-tag {
   cursor: pointer;
-  color: #666;
   text-decoration: none;
 }
 
