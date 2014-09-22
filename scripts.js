@@ -24,9 +24,32 @@ window._EST_ = {
     for (var i = 0; i < searchboxes.length; i++) {
       var sb = searchboxes[i]
 
+      sb.addEventListener('keydown', function (e) {
+        if (e.keyCode == 38 || e.keyCode == 40)
+          e.preventDefault()
+      }, false)
+
       sb.addEventListener('keyup', function (e) {
-        if (e.keyCode == 13)
-          _EST_.search(this.value)
+        // Enter
+        if (e.keyCode == 13) {
+          // check if autocomplete active
+          var autocomplete = document.getElementById('autocomplete')
+            , tags = autocomplete.getElementsByClassName('active')
+
+          if (tags.length > 0) {
+            _EST_.search(tags[0].getAttribute('data-content'))
+          } else {
+            _EST_.search(this.value)
+          }
+        }
+
+        // Up arrow
+        else if (e.keyCode == 38)
+          _EST_.focusPrevSearchResult()
+        
+        // Down arrow
+        else if (e.keyCode == 40)
+          _EST_.focusNextSearchResult()
 
         else if (this.value.length > 1) {
           _this = this
@@ -219,18 +242,20 @@ window._EST_ = {
       var container = document.createElement('div')
 
       for (var i in results) {
-        var type = document.createElement('div')
-        type.className = 'autocomplete-type'
-        type.textContent = _EST_.capitalize(i)
-        container.appendChild(type)
+        if (!_EST_.utils.isEmptyObj(results[i])) {
+          var type = document.createElement('div')
+          type.className = 'autocomplete-type'
+          type.textContent = _EST_.utils.capitalize(i)
+          container.appendChild(type)
 
-        for (var j in results[i]) {
-          var tag = document.createElement('div')
-          tag.className = 'autocomplete-tag'
-          tag.textContent = j + ' (' + results[i][j]+ ' gif'+(results[i][j] > 1 ? 's' : '')+')'
-          tag.setAttribute('data-content', j)
+          for (var j in results[i]) {
+            var tag = document.createElement('div')
+            tag.className = 'autocomplete-tag'
+            tag.textContent = j + ' (' + results[i][j]+ ' gif'+(results[i][j] > 1 ? 's' : '')+')'
+            tag.setAttribute('data-content', j)
 
-          container.appendChild(tag)
+            container.appendChild(tag)
+          }
         }
       }
 
@@ -327,19 +352,14 @@ window._EST_ = {
       return
     }
 
-    var results = {game: {}}
+    var results = {game: {}, players: {}, characters: {}, teams: {}, evt: {}, free: {}}
 
     for (var i = 0; i < data.hits.length; i++) {
       var hit = data.hits[i]
       
-      if (typeof results[hit.type] == 'undefined') {
-        results[hit.type] = {}
+      if (typeof results[hit.type][hit.content] == 'undefined')
         results[hit.type][hit.content] = 1
-      } else {
-        if (typeof results[hit.type][hit.content] == 'undefined')
-          results[hit.type][hit.content] = 1
-        else results[hit.type][hit.content]++
-      }
+      else results[hit.type][hit.content]++
     }
 
     var autocomplete = document.getElementById('autocomplete')
@@ -355,15 +375,74 @@ window._EST_ = {
   },
 
   hideAutocomplete: function () {
-    document.getElementById('autocomplete').style.display = 'none'
+    var autocomplete = document.getElementById('autocomplete')
+    autocomplete.style.display = 'none'
+  },
+
+  focusPrevSearchResult: function () {
+    var autocomplete = document.getElementById('autocomplete')
+      , tags = autocomplete.getElementsByClassName('autocomplete-tag')
+      , current = null
+
+    if (tags.length == 0)
+      return
+
+    for (var i = tags.length - 1; i >= 0; i--)
+      if (tags[i].className.indexOf('active') > -1)
+        current = i
+
+    if (current == null) {
+      tags[tags.length-1].className += ' active'
+    } else {
+      tags[current].className = tags[current].className.replace( /(?:^|\s)active(?!\S)/ , '' )
+        if (current == 0) {
+
+        } else {
+          tags[current-1].className += ' active'
+        }
+    }
+  },
+
+  focusNextSearchResult: function () {
+    var autocomplete = document.getElementById('autocomplete')
+      , tags = autocomplete.getElementsByClassName('autocomplete-tag')
+      , current = null
+
+    if (tags.length == 0)
+      return
+
+    for (var i = tags.length - 1; i >= 0; i--)
+      if (tags[i].className.indexOf('active') > -1)
+        current = i
+
+    if (current == null) {
+      tags[0].className += ' active'
+    } else {
+      tags[current].className = tags[current].className.replace( /(?:^|\s)active(?!\S)/ , '' )
+        if (current == tags.length-1) {
+
+        } else {
+          tags[current+1].className += ' active'
+        }
+    }
   },
 
   copyLink: function (link) {
     window.prompt('Copy-paste this link:', link)
   },
 
-  capitalize: function (string) {
-    return string[0].toUpperCase()+string.substring(1)
+  utils: {
+    isEmptyObj: function (obj) {
+      for(var prop in obj) {
+          if(obj.hasOwnProperty(prop))
+              return false
+      }
+      return true
+    },
+
+    capitalize: function (string) {
+      return string[0].toUpperCase()+string.substring(1)
+    }
   }
 }
 

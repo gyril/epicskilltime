@@ -231,7 +231,7 @@ fieldset input[type=text] {
 }
 
 #autocomplete {
-  position: absolute;
+  position: fixed;
   display: none;
   background-color: white;
   box-sizing: border-box;
@@ -252,7 +252,7 @@ fieldset input[type=text] {
   cursor: pointer;
 }
 
-.autocomplete-tag:hover {
+.autocomplete-tag:hover, .autocomplete-tag.active {
   background-color: #fff200;
 }
 
