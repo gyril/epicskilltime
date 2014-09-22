@@ -76,7 +76,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               <input name="free" placeholder="Free tag(s)" type="text" />
             </fieldset>
             <fieldset>
-              <input type="submit" name="submit" value="Upload" /> <span class="muted">Thanks for contributing!</span><br>
+              <input type="submit" name="submit" onclick="dataLayer.push({'event': 'gfyUploaded'});" value="Upload" /> <span class="muted">Thanks for contributing!</span><br>
             </fieldset>
           </form>
         </div>
