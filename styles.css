@@ -178,12 +178,14 @@ fieldset input[type=text] {
 }
 
 .gif-list-tag {
+  display: inline-block;
   border-radius: 1px;
   padding: 5px 10px;
   color: #FFF;
   background-color: #AAA;
   cursor: pointer;
   margin-right:5px;
+  margin-bottom: 5px;
   font-weight: 300;
   font-size: 13px;
 }
