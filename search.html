@@ -5,6 +5,11 @@
     <title>EpicSkillTime</title>
     <link rel="stylesheet" type="text/css" href="./styles.css" />
     <script type="text/javascript" src="./scripts.js"></script>
+    <script type="text/javascript" src="//rawgithub.com/algolia/algoliasearch-client-js/master/dist/algoliasearch.min.js"></script>
+    <script type="text/javascript">
+      var client = new AlgoliaSearch("07Y0OHK1NE", "e57db732fc8682a52448e177b5f0a248")
+      var index = client.initIndex('tags')
+    </script>
   </head>
   <body>
     <div id="header">
@@ -44,6 +49,8 @@
         </div>
       </div>
     </div>
+
+    <div id="autocomplete"></div>
 
     <script type="text/javascript">
       _EST_.listen()

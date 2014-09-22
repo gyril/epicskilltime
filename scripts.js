@@ -12,7 +12,7 @@ window._EST_ = {
     // tags
     document.addEventListener('click', function (e) {
       if (e.target.className.indexOf("tag") > -1 && e.target.childNodes.length == 1)
-        _EST_.search(e.target.textContent)
+        _EST_.search(e.target.getAttribute('data-content'))
 
       if (e.target.parentElement.className.indexOf("-gif") > -1)
         window.location.href = _EST_.domain + '/gif.html?' + e.target.parentElement.getAttribute('data-id')
@@ -27,6 +27,20 @@ window._EST_ = {
       sb.addEventListener('keyup', function (e) {
         if (e.keyCode == 13)
           _EST_.search(this.value)
+
+        else if (this.value.length > 1) {
+          _this = this
+          window.index.search(this.value, function (success, data) {
+            _EST_.autocomplete(success, data, _this)
+          })
+        }
+
+        else _EST_.hideAutocomplete()
+
+      }, false)
+
+      sb.addEventListener('blur', function () {
+        window.setTimeout(_EST_.hideAutocomplete, 300)
       }, false)
     }
   },
@@ -143,6 +157,7 @@ window._EST_ = {
 
         tagspan.className = 'gif-list-tag'
         tagspan.textContent = tag.content
+        tagspan.setAttribute('data-content', tag.content)
 
         tags.appendChild(tagspan)
 
@@ -189,11 +204,34 @@ window._EST_ = {
 
           content.className = 'metadata-tag'
           content.textContent = tagContent
+          content.setAttribute('data-content', tagContent)
           contents.appendChild(content)
         }
 
         container.appendChild(type)
         container.appendChild(contents)
+      }
+
+      return container
+    },
+
+    autocomplete: function (results) {
+      var container = document.createElement('div')
+
+      for (var i in results) {
+        var type = document.createElement('div')
+        type.className = 'autocomplete-type'
+        type.textContent = _EST_.capitalize(i)
+        container.appendChild(type)
+
+        for (var j in results[i]) {
+          var tag = document.createElement('div')
+          tag.className = 'autocomplete-tag'
+          tag.textContent = j + ' (' + results[i][j]+ ' gifs)'
+          tag.setAttribute('data-content', j)
+
+          container.appendChild(tag)
+        }
       }
 
       return container
@@ -260,6 +298,8 @@ window._EST_ = {
               return
             }
 
+            _EST_.currentOffset += 10
+
             var gifs = _EST_.tagListToGifList(data)
 
             for (var i in gifs) {
@@ -278,8 +318,52 @@ window._EST_ = {
     window.location.href = _EST_.domain + '/search.html?' + query.replace(/ /g, '+')
   },
 
+  autocomplete: function (success, data, searchbox) {
+    if (!success)
+      return
+
+    if (data.hits.length == 0) {
+      this.hideAutocomplete()
+      return
+    }
+
+    var results = {game: {}}
+
+    for (var i = 0; i < data.hits.length; i++) {
+      var hit = data.hits[i]
+      
+      if (typeof results[hit.type] == 'undefined') {
+        results[hit.type] = {}
+        results[hit.type][hit.content] = 1
+      } else {
+        if (typeof results[hit.type][hit.content] == 'undefined')
+          results[hit.type][hit.content] = 1
+        else results[hit.type][hit.content]++
+      }
+    }
+
+    var autocomplete = document.getElementById('autocomplete')
+
+    autocomplete.innerHTML = ''
+    autocomplete.appendChild(_EST_.templates.autocomplete(results))
+    autocomplete.style.top = (searchbox.offsetTop + searchbox.offsetHeight + 10) + 'px'
+    autocomplete.style.left = searchbox.offsetLeft + 'px'
+    autocomplete.style.width = searchbox.offsetWidth + 'px'
+    autocomplete.style.display = 'block'
+
+
+  },
+
+  hideAutocomplete: function () {
+    document.getElementById('autocomplete').style.display = 'none'
+  },
+
   copyLink: function (link) {
     window.prompt('Copy-paste this link:', link)
+  },
+
+  capitalize: function (string) {
+    return string[0].toUpperCase()+string.substring(1)
   }
 }
 
