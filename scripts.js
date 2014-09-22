@@ -227,7 +227,7 @@ window._EST_ = {
         for (var j in results[i]) {
           var tag = document.createElement('div')
           tag.className = 'autocomplete-tag'
-          tag.textContent = j + ' (' + results[i][j]+ ' gifs)'
+          tag.textContent = j + ' (' + results[i][j]+ ' gif'+(results[i][j] > 1 ? 's' : '')+')'
           tag.setAttribute('data-content', j)
 
           container.appendChild(tag)
