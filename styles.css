@@ -130,10 +130,12 @@ fieldset input[type=text] {
 }
 
 #main {
-  margin-top: 64px;
-  padding: 20px 0px;
+  padding-top: 64px;
+  padding-bottom: 20px;
   background-color: #e9e7e8;
   overflow: hidden;
+  min-height: 1vh;
+  box-sizing: border-box;
 }
 
 #left-column {
