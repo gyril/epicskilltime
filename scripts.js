@@ -3,10 +3,16 @@ window._EST_ = {
   domain: '',
   APIdomain: '', 
 
+
   init: function () {
     this.domain = this.env == 'prod' ? 'http://epicskilltime.airhost.me' : 'http://localhost:1337/epicskilltime'
     this.APIdomain = this.env == 'prod' ? 'http://epicskilltime.herokuapp.com' : 'http://localhost:7777'
   },
+
+  denis: function(){
+    return 'bogoss';
+  },
+
 
   listen: function () {
     // tags
