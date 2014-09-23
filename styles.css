@@ -40,6 +40,7 @@ input[type=submit], button {
   width: auto;
   outline: 0;
   font-family: Raleway, Open Sans, sans-serif;
+  box-shadow: 0 2px 3px 0 rgba(0,0,0,0.18);
 }
 
 fieldset {
@@ -80,7 +81,7 @@ fieldset input[type=text] {
   overflow: hidden;
   width: 100%;
   line-height: 44px;
-  border-bottom: solid 1px #DDDD00;
+  box-shadow: 0 0 5px 0 rgba(0,0,0,0.12);
   position: fixed;
   top: 0;
 }
@@ -148,7 +149,7 @@ fieldset input[type=text] {
 .card {
   border-radius: 1px;
   background-color: white;
-  box-shadow: 0 3px 3px -3px #666;
+  box-shadow: 0 3px 5px 0px rgba(0,0,0,0.27);
   padding: 10px;
   margin-bottom: 20px;
 }
