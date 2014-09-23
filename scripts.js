@@ -72,6 +72,22 @@ window._EST_ = {
         window.setTimeout(_EST_.hideAutocomplete, 300)
       }, false)
     }
+
+    // play pause gifs
+    this.intervals.push(window.setInterval(function () {
+      var videos = document.getElementsByTagName('video')
+
+      for (var i = 0; i < videos.length; i++) {
+        var video = videos[i]
+        if (_EST_.utils.isInViewport(video)) {
+          if(video.paused)
+            video.play()
+        } else {
+          if (!video.paused)
+            video.pause()
+        }
+      }
+    }, 200))
   },
 
   isQuerying: false,
@@ -160,7 +176,7 @@ window._EST_ = {
       var video = document.createElement('video')
 
       video.frameborder = 0
-      video.autoplay = 'true'
+      video.autoplay = 'false'
       video.loop = 'true'
       video.muted = 'true'
       video.width = '720'
@@ -444,6 +460,12 @@ window._EST_ = {
               return false
       }
       return true
+    },
+
+    isInViewport: function (video) {
+      var viewport = [window.scrollY, window.scrollY + document.documentElement.offsetHeight]
+
+      return (video.offsetTop > viewport[0] && video.offsetTop + video.offsetHeight < viewport[1])
     },
 
     capitalize: function (string) {
