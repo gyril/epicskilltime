@@ -465,7 +465,7 @@ window._EST_ = {
     isInViewport: function (video) {
       var viewport = [window.scrollY, window.scrollY + document.documentElement.offsetHeight]
 
-      return (video.offsetTop > viewport[0] && video.offsetTop + video.offsetHeight < viewport[1])
+      return (video.offsetTop + 200 > viewport[0] && video.offsetTop + video.offsetHeight < viewport[1])
     },
 
     capitalize: function (string) {
