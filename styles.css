@@ -60,6 +60,27 @@ fieldset input[type=text] {
   border: 2px solid #AAA;
   border-radius: 2px;
   font-family: Raleway, Open Sans, sans-serif;
+  color: #404241;
+}
+
+input[type=text]::-webkit-input-placeholder {
+  color: #404241;
+  opacity: 0.8;
+}
+
+input[type=text]:-moz-placeholder {
+  color: #404241;
+  opacity: 0.8;
+}
+
+input[type=text]::-moz-placeholder {
+  color: #404241;
+  opacity: 0.8;
+}
+
+input[type=text]:-ms-input-placeholder {
+  color: #404241;
+  opacity: 0.8;
 }
 
 .muted {
@@ -78,7 +99,7 @@ fieldset input[type=text] {
 #header {
   background-color: #fff200;
   padding: 10px 0px;
-  overflow: hidden;
+  overflow: visible;
   width: 100%;
   line-height: 44px;
   box-shadow: 0 0 5px 0 rgba(0,0,0,0.12);
@@ -94,6 +115,7 @@ fieldset input[type=text] {
 }
 
 #search {
+  position: relative;
   float: left;
   width: 60%;
 }
@@ -102,22 +124,50 @@ fieldset input[type=text] {
 
 .searchbox {
   height: 36px;
-  margin: 4px;
+  margin-top: 4px;
   width: 300px;
-  border: 0;
+  border: solid 1px #E4E4E4;
   outline: 0;
   padding: 0px 20px 0px 40px;
-  font-size: 18px;
+  font-size: 14px;
   font-family: Raleway, Open Sans, sans-serif;
   background-image: url('./search.svg');
   background-repeat: no-repeat;
   background-size: 28px;
   background-position: 5px;
+  background-color: #FFF;
 }
 
 #search .searchbox {
-  background-color: hsl(60, 100%, 85%);
   float: right;
+}
+
+#autocomplete {
+  position: absolute;
+  right: 0px;
+  display: none;
+  background-color: white;
+  box-sizing: border-box;
+  border-radius: 0 0 1px 1px;
+  border: solid 1px #E4E4E4;
+  font-size: 14px;
+  font-family: 'Raleway', 'Open Sans', sans-serif;
+  box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.27);
+  line-height: 32px;
+}
+
+.autocomplete-type {
+  padding-left: 10px;
+  font-weight: bold;
+}
+
+.autocomplete-tag {
+  padding-left: 25px;
+  cursor: pointer;
+}
+
+.autocomplete-tag:hover, .autocomplete-tag.active {
+  background-color: #F0F0F0;
 }
 
 #upload {
@@ -130,12 +180,10 @@ fieldset input[type=text] {
 }
 
 #main {
-  padding-top: 64px;
-  padding-bottom: 20px;
+  margin-top: 64px;
+  padding: 20px 0px;
   background-color: #e9e7e8;
   overflow: hidden;
-  min-height: 1vh;
-  box-sizing: border-box;
 }
 
 #left-column {
@@ -233,30 +281,9 @@ fieldset input[type=text] {
   text-decoration: underline;
 }
 
-#autocomplete {
-  position: fixed;
-  display: none;
-  background-color: white;
-  box-sizing: border-box;
-  padding: 10px;
-  box-shadow: 0 1px 5px 0px black;
-  border-radius: 1px;
-  font: 14px 'Open Sans', sans-serif;
-}
-
-.autocomplete-type {
-  margin-top: 10px;
-}
-
-.autocomplete-tag {
-  margin-left: 10px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.autocomplete-tag:hover, .autocomplete-tag.active {
-  background-color: #fff200;
+.thumbnail {
+  margin-top: 20px;
+  width: 350px;
 }
 
 #add-form {

@@ -12,7 +12,7 @@
     </script>
   </head>
   <body>
-  
+
    <!-- dataLayer -->
 <script>
 var dataLayer = dataLayer || [];
@@ -37,6 +37,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <a href="./"><div id="logo">Epic<strong>Skill</strong>Time</div></a>
         <div id="search">
           <input type="text" class="searchbox" placeholder="Game, player, event..."></input>
+          <div id="autocomplete"></div>
         </div>
         <div id="upload">
           <a href="./add.html"><button>Upload</button></a>
@@ -54,7 +55,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <h1 style="text-align: right">Placeholder</h1>
 
           <div class="card" id="metadata">
-            
+
           </div>
 
           <div class="card">
@@ -64,11 +65,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       </div>
     </div>
 
-    <div id="autocomplete"></div>
-
     <script type="text/javascript">
       _EST_.listen()
-      
+
       _EST_.queryGif(window.location.search.substr(1), function (data) {
         var gif = _EST_.tagListToGifList(data)[0]
         document.getElementById("left-column").appendChild(_EST_.templates.list(gif))

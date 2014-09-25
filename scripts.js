@@ -1,7 +1,7 @@
 window._EST_ = {
   env: window.location.href.indexOf('epicskilltime.') > -1 ? 'prod' : 'dev',
   domain: '',
-  APIdomain: '', 
+  APIdomain: '',
 
 
   init: function () {
@@ -52,7 +52,7 @@ window._EST_ = {
         // Up arrow
         else if (e.keyCode == 38)
           _EST_.focusPrevSearchResult()
-        
+
         // Down arrow
         else if (e.keyCode == 40)
           _EST_.focusNextSearchResult()
@@ -100,14 +100,14 @@ window._EST_ = {
 
     var xhr = new XMLHttpRequest()
     xhr.open('GET', this.APIdomain + '/gif/' + id, true)
-    
+
     xhr.onload = function(e) {
       if (this.status == 200) {
         _EST_.isQuerying = false
         callback(JSON.parse(this.responseText))
       }
     }
-    
+
     this.isQuerying = true
     xhr.send()
   },
@@ -123,14 +123,14 @@ window._EST_ = {
 
     var xhr = new XMLHttpRequest()
     xhr.open('GET', this.APIdomain + '/list/' + order + '/' + number + '/' + offset, true)
-    
+
     xhr.onload = function(e) {
       if (this.status == 200) {
         _EST_.isQuerying = false
         callback(JSON.parse(this.responseText))
       }
     }
-    
+
     this.isQuerying = true
     xhr.send()
   },
@@ -141,14 +141,14 @@ window._EST_ = {
 
     var xhr = new XMLHttpRequest()
     xhr.open('GET', this.APIdomain + '/search/' + query, true)
-    
+
     xhr.onload = function(e) {
       if (this.status == 200) {
         _EST_.isQuerying = false
         callback(JSON.parse(this.responseText))
       }
     }
-    
+
     this.isQuerying = true
     xhr.send()
   },
@@ -172,7 +172,7 @@ window._EST_ = {
       links.className = 'gif-list-links'
 
       title.textContent = gif.title
-      
+
       var video = document.createElement('video')
 
       video.frameborder = 0
@@ -234,7 +234,7 @@ window._EST_ = {
       for (var i in tagtypes) {
         var type = document.createElement('div')
           , contents = document.createElement('div')
-          
+
         type.className = 'card-title'
         type.textContent = i.toUpperCase()
 
@@ -317,7 +317,7 @@ window._EST_ = {
 
   tagListToTagTypes: function (tags) {
     var types = {}
-    
+
     for (var i = 0; i < tags.length; i++) {
       var tag = tags[i]
 
@@ -378,7 +378,7 @@ window._EST_ = {
 
     for (var i = 0; i < data.hits.length; i++) {
       var hit = data.hits[i]
-      
+
       if (typeof results[hit.type][hit.content] == 'undefined')
         results[hit.type][hit.content] = 1
       else results[hit.type][hit.content]++
@@ -388,8 +388,7 @@ window._EST_ = {
 
     autocomplete.innerHTML = ''
     autocomplete.appendChild(_EST_.templates.autocomplete(results))
-    autocomplete.style.top = (searchbox.offsetTop + searchbox.offsetHeight + 10) + 'px'
-    autocomplete.style.left = searchbox.offsetLeft + 'px'
+    autocomplete.style.top = (searchbox.offsetTop + searchbox.offsetHeight - 1) + 'px'
     autocomplete.style.width = searchbox.offsetWidth + 'px'
     autocomplete.style.display = 'block'
 
