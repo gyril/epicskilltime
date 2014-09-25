@@ -133,8 +133,8 @@ input[type=text]:-ms-input-placeholder {
   font-family: Raleway, Open Sans, sans-serif;
   background-image: url('./search.svg');
   background-repeat: no-repeat;
-  background-size: 28px;
-  background-position: 5px;
+  background-size: 18px;
+  background-position: 10px;
   background-color: #FFF;
 }
 
