@@ -184,7 +184,7 @@ input[type=text]:-ms-input-placeholder {
   padding-bottom: 20px;
   background-color: #e9e7e8;
   overflow: hidden;
-  min-height: 1vh;
+  min-height: 100%;
   box-sizing: border-box;
 }
 
