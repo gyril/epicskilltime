@@ -124,7 +124,7 @@ input[type=text]:-ms-input-placeholder {
 
 .searchbox {
   height: 36px;
-  margin-top: 4px;
+  margin-top: 2px;
   width: 300px;
   border: solid 1px #E4E4E4;
   outline: 0;
