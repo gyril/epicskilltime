@@ -209,9 +209,18 @@ window._EST_ = {
           game.textContent = tag.content
       }
 
+      var permalink = _EST_.domain + '/gif.html?' + gif.id
+
+      var share_fb = document.createElement('a')
+      share_fb.className = 'gif-share-fb'
+      share_fb.setAttribute('href', "https://facebook.com/sharer.php?u=" + permalink)
+      share_fb.setAttribute('target', "_blank")
+      share_fb.textContent = 'Share'
+      links.appendChild(share_fb)
+
       var link = document.createElement('a')
       link.className = 'gif-list-link'
-      link.setAttribute('data-link', _EST_.domain + '/gif.html?' + gif.id)
+      link.setAttribute('data-link', permalink)
       link.addEventListener('click', function () {
         _EST_.copyLink(this.getAttribute('data-link'))
       }, false)
@@ -449,6 +458,21 @@ window._EST_ = {
 
   copyLink: function (link) {
     window.prompt('Copy-paste this link:', link)
+  },
+
+  customOG: function (title) {
+    var head = document.getElementsByTagName("head")[0]
+
+    var meta_url = document.createElement('meta')
+    meta_url.setAttribute('property', 'og:url')
+    meta_url.setAttribute('content', 'document.location.href')
+
+    var meta_title = document.createElement('meta')
+    meta_title.setAttribute('property', 'og:title')
+    meta_title.setAttribute('content', title)
+
+    head.appendChild(meta_url)
+    head.appendChild(meta_title)
   },
 
   utils: {

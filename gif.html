@@ -69,6 +69,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         var gif = _EST_.tagListToGifList(data)[0]
         document.getElementById("left-column").appendChild(_EST_.templates.list(gif))
         document.getElementById("metadata").appendChild(_EST_.templates.metadata(_EST_.tagListToTagTypes(gif.tags)))
+        _EST_.customOG('This will be my title')
       })
 
       document.getElementById("id").textContent = window.location.search.substr(1)

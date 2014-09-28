@@ -262,6 +262,22 @@ input[type=text]:-ms-input-placeholder {
   text-decoration: none;
 }
 
+.gif-list-links .gif-share-fb {
+  background: #3B5998;
+  display: inline-block;
+  color: white;
+  font-size: 12px;
+  padding: 4px;
+  border-radius: 2px;
+  margin-right: 6px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.gif-share-fb:hover {
+  text-decoration: none;
+}
+
 .card-title {
   font-weight: 700;
 }
