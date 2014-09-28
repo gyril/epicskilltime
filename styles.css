@@ -92,7 +92,7 @@ input[type=text]:-ms-input-placeholder {
 }
 
 .container {
-  width: 1200px;
+  width: 1080px;
   margin: 0 auto;
 }
 
@@ -189,13 +189,13 @@ input[type=text]:-ms-input-placeholder {
 }
 
 #left-column {
-  width: 66%;
+  width: 620px;
   float: left;
 }
 
 #right-column {
-  width: 34%;
-  float: left;
+  width: 350px;
+  float: right;
 }
 
 .card {
@@ -203,11 +203,11 @@ input[type=text]:-ms-input-placeholder {
   background-color: white;
   box-shadow: 0 3px 5px 0px rgba(0,0,0,0.27);
   padding: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
 .gif-list {
-  width: 720px;
+  width: 600px;
 }
 
 .gif-list-title {
@@ -266,10 +266,6 @@ input[type=text]:-ms-input-placeholder {
   font-weight: 700;
 }
 
-.card ul {
-  margin-left: 20px;
-}
-
 .card .metadata-contents {
   margin-left: 20px;
 }
@@ -285,7 +281,7 @@ input[type=text]:-ms-input-placeholder {
 
 .thumbnail {
   margin-top: 20px;
-  width: 350px;
+  width: 330px;
 }
 
 #add-form {

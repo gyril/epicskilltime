@@ -179,8 +179,7 @@ window._EST_ = {
       video.autoplay = 'false'
       video.loop = 'true'
       video.muted = 'true'
-      video.width = '720'
-      video.height = 720 * gif.height / gif.width
+      video.width = '600'
       video.style.border = 'none'
 
       if (gif.webmurl) {
