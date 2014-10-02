@@ -283,6 +283,15 @@ window._EST_ = {
       return container
     }
   },
+ 
+  ogTags: function (gif) {
+    return {
+      url: this.domain + '/gif.html?' + gif.id,
+      title: gif.title,
+      image: 'http://thumbs.gfycat.com/'+gif.webmurl.split('/').reverse()[0].split('.')[0]+'-poster.jpg',
+      site_name: 'http://ggwp.com/'
+    }
+  },
 
   tagListToGifList: function (tags) {
 
