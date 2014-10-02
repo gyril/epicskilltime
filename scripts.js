@@ -182,16 +182,14 @@ window._EST_ = {
       video.width = '600'
       video.style.border = 'none'
 
-      if (gif.webmurl) {
-        var webmsrc = document.createElement('source')
-        webmsrc.src = gif.webmurl
-        video.appendChild(webmsrc)
-      } else if (gif.mp4url) {
-        var mp4src = document.createElement('source')
-        mp4src.src = gif.mp4url
-        video.appendChild(mp4src)
-      }
+      var webmsrc = document.createElement('source')
+      webmsrc.src = gif.webmurl
+      video.appendChild(webmsrc)
 
+      var mp4src = document.createElement('source')
+      mp4src.src = gif.mp4url
+      video.appendChild(mp4src)
+      
       gifvid.setAttribute('data-id', gif.id)
       gifvid.appendChild(video)
 
