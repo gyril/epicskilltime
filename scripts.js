@@ -20,8 +20,11 @@ window._EST_ = {
       if (e.target.className.indexOf("tag") > -1 && e.target.childNodes.length == 1)
         _EST_.search(e.target.getAttribute('data-content'))
 
-      if (e.target.parentElement.className.indexOf("-gif") > -1)
-        window.location.href = _EST_.domain + '/gif.html?' + e.target.parentElement.getAttribute('data-id')
+      if (e.target.parentElement.className.indexOf("-gif") > -1) {
+        var gifURL = _EST_.domain + '/gif.html?' + e.target.parentElement.getAttribute('data-id')
+        if (window.location.href.indexOf(gifURL) < 0)
+          window.location.href = gifURL
+      }
     }, false)
 
     // searchboxes
@@ -182,13 +185,20 @@ window._EST_ = {
       video.width = '600'
       video.style.border = 'none'
 
-      var webmsrc = document.createElement('source')
-      webmsrc.src = gif.webmurl
-      video.appendChild(webmsrc)
-
       var mp4src = document.createElement('source')
       mp4src.src = gif.mp4url
+      if (navigator.userAgent.toLowerCase().indexOf("android") > -1) {
+        mp4src.src = gif.mp4url.replace(/\.mp4/g, '-android.mp4')
+        video.controls = true
+        video.style.backgroundColor = 'black'
+      }
+      mp4src.type = 'video/mp4'
       video.appendChild(mp4src)
+
+      var webmsrc = document.createElement('source')
+      webmsrc.src = gif.webmurl
+      webmsrc.type = 'video/webm'
+      video.appendChild(webmsrc)
       
       gifvid.setAttribute('data-id', gif.id)
       gifvid.appendChild(video)
