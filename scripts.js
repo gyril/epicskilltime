@@ -10,9 +10,8 @@ window._EST_ = {
   },
 
   denis: function(){
-    return 'bogoss';
+    return 'boloss';
   },
-
 
   listen: function () {
     // tags
@@ -61,9 +60,9 @@ window._EST_ = {
           _EST_.focusNextSearchResult()
 
         else if (this.value.length > 1) {
-          _this = this
-          window.index.search(this.value, function (success, data) {
-            _EST_.autocomplete(success, data, _this)
+          var _this = this
+          _EST_.searchGifs(this.value, function (data) {
+            _EST_.autocomplete(data, _this)
           })
         }
 
@@ -115,6 +114,24 @@ window._EST_ = {
     xhr.send()
   },
 
+  queryGifList: function (list, callback) {
+    if (this.isQuerying)
+      return
+
+    var xhr = new XMLHttpRequest()
+    xhr.open('GET', this.APIdomain + '/gif/list/' + list.join('+'), true)
+
+    xhr.onload = function(e) {
+      if (this.status == 200) {
+        _EST_.isQuerying = false
+        callback(JSON.parse(this.responseText))
+      }
+    }
+
+    this.isQuerying = true
+    xhr.send()
+  },
+
   queryGifs: function (options) {
     if (this.isQuerying)
       return
@@ -139,21 +156,12 @@ window._EST_ = {
   },
 
   searchGifs: function (query, callback) {
-    if (this.isQuerying)
-      return
+    window.index.search(query, function (success, data) {
+      if (!success)
+        return
 
-    var xhr = new XMLHttpRequest()
-    xhr.open('GET', this.APIdomain + '/search/' + query, true)
-
-    xhr.onload = function(e) {
-      if (this.status == 200) {
-        _EST_.isQuerying = false
-        callback(JSON.parse(this.responseText))
-      }
-    }
-
-    this.isQuerying = true
-    xhr.send()
+      callback(data)
+    })
   },
 
   templates: {
@@ -381,10 +389,7 @@ window._EST_ = {
     window.location.href = _EST_.domain + '/search.html?' + query.replace(/ /g, '+')
   },
 
-  autocomplete: function (success, data, searchbox) {
-    if (!success)
-      return
-
+  autocomplete: function (data, searchbox) {
     if (data.hits.length == 0) {
       this.hideAutocomplete()
       return
