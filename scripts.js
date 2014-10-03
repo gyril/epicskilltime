@@ -119,7 +119,7 @@ window._EST_ = {
       return
 
     var xhr = new XMLHttpRequest()
-    xhr.open('GET', this.APIdomain + '/gif/list/' + list.join('+'), true)
+    xhr.open('GET', this.APIdomain + '/list/' + list.join('+'), true)
 
     xhr.onload = function(e) {
       if (this.status == 200) {
