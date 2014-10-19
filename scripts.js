@@ -255,6 +255,20 @@ window._EST_ = {
       return container
     },
 
+    gameGate: function (gif) {
+      var gateLink = document.createElement('a')
+      gateLink.className = 'game-gate-link'
+      for (var i = 0; i < gif.tags.length; i++) {
+        var tag = gif.tags[i]
+        if (tag.type == 'game')
+          gateLink.textContent = "Watch more gifs for " + tag.content
+          gateLink.setAttribute('href', document.location.origin+"/search.html?" + tag.content.replace(/ /g, "+"))
+          break
+      }
+
+      return gateLink
+    },
+
     metadata: function (tagtypes) {
       var container = document.createElement('div')
 

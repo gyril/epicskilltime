@@ -292,3 +292,14 @@ a.gif-list-title-hashtag {
   width: 500px;
   margin: 0 auto;
 }
+
+a.game-gate-link {
+  display: block;
+  text-decoration: none;
+  text-align: center;
+  background-color: #f64747;
+  border-radius: 2px;
+  padding: 10px;
+  color: white;
+  margin-top: -20px;
+}

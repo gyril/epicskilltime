@@ -69,6 +69,8 @@
           , ogTags = _EST_.ogTags(gif)
 
         document.getElementById("left-column").appendChild(_EST_.templates.list(gif))
+        document.getElementById("left-column").appendChild(_EST_.templates.gameGate(gif))
+
         document.getElementById("metadata").appendChild(_EST_.templates.metadata(_EST_.tagListToTagTypes(gif.tags)))
 
         console.log(gif)
