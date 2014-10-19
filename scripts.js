@@ -190,7 +190,6 @@ window._EST_ = {
       links.className = 'gif-list-links'
 
       title.textContent = gif.title
-      var emptyString = "";
       title.innerHTML = title.textContent.replace(/\#([a-z0-9\-\_]*)/ig, "<a href="+document.location.origin+"/search.html?$1 class='gif-list-title-hashtag'>#$1</a>")
 
       var video = document.createElement('video')
