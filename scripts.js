@@ -190,6 +190,8 @@ window._EST_ = {
       links.className = 'gif-list-links'
 
       title.textContent = gif.title
+      var emptyString = "";
+      title.innerHTML = title.textContent.replace(/\#([a-z0-9\-\_]*)/ig, "<a href="+document.location.origin+"/search.html?$1 class='gif-list-title-hashtag'>#$1</a>")
 
       var video = document.createElement('video')
 
@@ -214,7 +216,7 @@ window._EST_ = {
       webmsrc.src = gif.webmurl
       webmsrc.type = 'video/webm'
       video.appendChild(webmsrc)
-      
+
       gifvid.setAttribute('data-id', gif.id)
       gifvid.appendChild(video)
 
@@ -230,6 +232,9 @@ window._EST_ = {
 
         if (tag.type == 'game')
           game.textContent = tag.content
+          var gameLink = document.createElement('a')
+          gameLink.className = "gif-list-game-link"
+          gameLink.setAttribute('href', document.location.origin + "/search.html?"+ game.textContent.replace(/\ /g,"+"))
       }
 
       var link = document.createElement('a')
@@ -242,7 +247,8 @@ window._EST_ = {
       links.appendChild(link)
 
       container.appendChild(title)
-      container.appendChild(game)
+      container.appendChild(gameLink)
+      gameLink.appendChild(game)
       container.appendChild(gifvid)
       container.appendChild(tags)
       container.appendChild(links)
@@ -306,7 +312,7 @@ window._EST_ = {
       return container
     }
   },
- 
+
   ogTags: function (gif) {
     return {
       url: this.domain + '/gif.html?' + gif.id,
