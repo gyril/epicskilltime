@@ -99,6 +99,21 @@ window._EST_ = {
     $Tags.value = tags.join(", ")
   },
 
+  selectGames: function(callback) {
+    var xhr = new XMLHttpRequest()
+    xhr.open('GET', this.APIdomain + '/games', true)
+
+    xhr.onload = function(e) {
+      if (this.status == 200) {
+        _EST_.isQuerying = false
+        callback(JSON.parse(this.responseText))
+      }
+    }
+
+    this.isQuerying = true
+    xhr.send()
+  },
+
   isQuerying: false,
   currentOffset: 0,
   noGifLeft: false,

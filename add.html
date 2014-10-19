@@ -55,7 +55,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               <input autofocus name="url" type="text" placeholder="Gfycat URL (only gfycat for now)" />
             </fieldset>
             <fieldset>
-              <input name="game" type="text" placeholder="Game" />
+              <select name="game" type="text" placeholder="Game (list will be extended in the future)" />
+              </select>
             </fieldset>
             <fieldset>
               <input name="title" type="text" maxlength="140" placeholder="Title (hashtags supported)" />
@@ -72,6 +73,28 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <script type="text/javascript">
       document.getElementById('add-form').action = _EST_.APIdomain + '/add'
 
+      _EST_.selectGames(function(lGames){
+
+        var gameSelector = document.getElementsByName('game')[0]
+
+        var lGameNames = []
+
+        for (var i=0, iLength = lGames.length; i < iLength; i++) {
+          var sGame = lGames[i].content
+          lGameNames.push(sGame)
+        }
+
+        lGameNames.sort()
+        for (var i=0, iLength = lGameNames.length; i < iLength; i++) {
+          var sGame = lGameNames[i]
+          if (sGame != "") {
+            var option = document.createElement('option')
+            option.value = sGame
+            option.textContent = sGame
+            gameSelector.appendChild(option)
+          }
+        }
+      })
       _EST_.listen()
     </script>
   </body>
