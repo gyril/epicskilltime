@@ -253,6 +253,7 @@ a.gif-list-title-hashtag {
 
 .gif-list-links {
   text-align: right;
+  margin-bottom: 4px;
 }
 
 .gif-list-link {
@@ -304,5 +305,6 @@ a.game-gate-link {
   border-radius: 2px;
   padding: 10px;
   color: white;
-  margin-top: -20px;
+  margin-top: -25px;
+  box-shadow: 0 3px 5px 0px rgba(0,0,0,0.27);
 }
