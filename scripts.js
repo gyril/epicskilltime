@@ -19,6 +19,10 @@ window._EST_ = {
       if (e.target.className.indexOf("tag") > -1 && e.target.childNodes.length == 1)
         _EST_.search(e.target.getAttribute('data-content'))
 
+      if (e.target.className.indexOf('playbackrate') >= 0) {
+        return
+      }
+
       if (e.target.parentElement.className.indexOf("-gif") > -1) {
         var gifURL = _EST_.domain + '/gif.html?' + e.target.parentElement.getAttribute('data-id')
         if (window.location.href.indexOf(gifURL) < 0)
@@ -231,6 +235,27 @@ window._EST_ = {
 
       gifvid.setAttribute('data-id', gif.id)
       gifvid.appendChild(video)
+
+      var fast = document.createElement('div')
+      fast.className = "gif-video-playbackrate"
+      fast.classList.add('selected-playback')
+      fast.textContent = "x1"
+      gifvid.appendChild(fast)
+      var slow = document.createElement('div')
+      slow.className = "gif-video-playbackrate"
+      slow.textContent = "x½"
+      gifvid.appendChild(slow)
+      slow.addEventListener('click', function(e){
+        video.playbackRate = 0.4
+        slow.classList.add("selected-playback")
+        fast.classList.remove("selected-playback")
+      })
+      fast.addEventListener('click', function(e){
+        video.playbackRate = 1
+        fast.classList.add("selected-playback")
+        slow.classList.remove("selected-playback")
+      })
+
 
       for (var i = 0; i < gif.tags.length; i++) {
         var tag = gif.tags[i]
