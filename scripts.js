@@ -203,7 +203,7 @@ window._EST_ = {
       links.className = 'gif-list-links'
 
       title.textContent = gif.title
-      title.innerHTML = title.textContent.replace(/\#([a-z0-9\-\_]*)/ig, "<a href="+document.location.origin+"/search.html?$1 class='gif-list-title-hashtag'>#$1</a>")
+      title.innerHTML = title.textContent.replace(/\#([a-z0-9\-\_]*)/ig, "<a href="+_EST_.domain+"/search.html?$1 class='gif-list-title-hashtag'>#$1</a>")
 
       var video = document.createElement('video')
 
@@ -238,7 +238,7 @@ window._EST_ = {
           game.textContent = tag.content
           var gameLink = document.createElement('a')
           gameLink.className = "gif-list-game-link"
-          gameLink.setAttribute('href', document.location.origin + "/search.html?"+ game.textContent.replace(/\ /g,"+"))
+          gameLink.setAttribute('href', _EST_.domain + "/search.html?"+ game.textContent.replace(/\ /g,"+"))
       }
 
       var facebook = document.createElement('a')
@@ -273,7 +273,7 @@ window._EST_ = {
         var tag = gif.tags[i]
         if (tag.type == 'game')
           gateLink.textContent = "Watch more gifs for " + tag.content
-          gateLink.setAttribute('href', document.location.origin+"/search.html?" + tag.content.replace(/ /g, "+"))
+          gateLink.setAttribute('href', _EST_.domain+"/search.html?" + tag.content.replace(/ /g, "+"))
           break
       }
 
