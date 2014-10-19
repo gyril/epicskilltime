@@ -180,13 +180,11 @@ window._EST_ = {
       var title = document.createElement('div')
         , game = document.createElement('div')
         , gifvid = document.createElement('div')
-        , tags = document.createElement('div')
         , links = document.createElement('div')
 
       title.className = 'gif-list-title'
       game.className = 'gif-list-game'
       gifvid.className = 'gif-list-gif'
-      tags.className = 'gif-list-tags'
       links.className = 'gif-list-links'
 
       title.textContent = gif.title
@@ -221,14 +219,6 @@ window._EST_ = {
 
       for (var i = 0; i < gif.tags.length; i++) {
         var tag = gif.tags[i]
-          , tagspan = document.createElement('span')
-
-        tagspan.className = 'gif-list-tag'
-        tagspan.textContent = tag.content
-        tagspan.setAttribute('data-content', tag.content)
-
-        tags.appendChild(tagspan)
-
         if (tag.type == 'game')
           game.textContent = tag.content
           var gameLink = document.createElement('a')
@@ -249,7 +239,6 @@ window._EST_ = {
       container.appendChild(gameLink)
       gameLink.appendChild(game)
       container.appendChild(gifvid)
-      container.appendChild(tags)
       container.appendChild(links)
 
       return container
