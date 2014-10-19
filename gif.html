@@ -48,8 +48,6 @@
     <div id="main">
       <div class="container">
         <div id="left-column">
-          <h1>Gif #<span id="id"></span></h1>
-
         </div>
         <div id="right-column">
           <h1 style="text-align: right">Placeholder</h1>
@@ -72,7 +70,7 @@
 
         document.getElementById("left-column").appendChild(_EST_.templates.list(gif))
         document.getElementById("metadata").appendChild(_EST_.templates.metadata(_EST_.tagListToTagTypes(gif.tags)))
-       
+
         console.log(gif)
         for (var i in ogTags) {
           var meta = document.createElement("meta")
