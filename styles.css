@@ -256,7 +256,10 @@ a.gif-list-title-hashtag {
 }
 
 .gif-list-link {
-  text-decoration: underline;
+  background: #404241;
+  color: white;
+  padding: 5px 10px 5px 10px;
+  border-radius: 2px;
   font-weight: 300;
   font-size: 14px;
   cursor: pointer;
