@@ -71,6 +71,12 @@
         document.getElementById("left-column").appendChild(_EST_.templates.list(gif))
         document.getElementById("left-column").appendChild(_EST_.templates.gameGate(gif))
 
+        var uploadGif = document.createElement('a')
+        uploadGif.setAttribute('href', _EST_.domain + '/add.html')
+        uploadGif.className = "upload-gate-link"
+        uploadGif.textContent = "or Upload yours"
+        document.getElementById("left-column").appendChild(uploadGif)
+
         document.getElementById("metadata").appendChild(_EST_.templates.metadata(_EST_.tagListToTagTypes(gif.tags)))
 
         console.log(gif)

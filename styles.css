@@ -316,10 +316,22 @@ a.game-gate-link {
   display: block;
   text-decoration: none;
   text-align: center;
-  background-color: #f64747;
+  background-color: #397DF9;
   border-radius: 2px;
   padding: 10px;
   color: white;
   margin-top: -25px;
+  box-shadow: 0 3px 5px 0px rgba(0,0,0,0.27);
+}
+
+a.upload-gate-link {
+  display: block;
+  text-decoration: none;
+  text-align: center;
+  background-color: #f64747;
+  border-radius: 2px;
+  padding: 10px;
+  color: white;
+  margin-top: 10px;
   box-shadow: 0 3px 5px 0px rgba(0,0,0,0.27);
 }
