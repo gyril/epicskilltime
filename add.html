@@ -50,34 +50,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <h1>Add an epic play</h1>
 
         <div class="card">
-          <div style="text-align:center"><span class="muted italic">Separate multiple elements with commas</span></div>
           <form id="add-form" method="post">
             <fieldset>
-              <input autofocus name="url" type="text" placeholder="Gfycat URL (only gfycat for now)*" />
+              <input autofocus name="url" type="text" placeholder="Gfycat URL (only gfycat for now)" />
             </fieldset>
             <fieldset>
-              <input name="game" type="text" placeholder="Game*" />
+              <input name="game" type="text" placeholder="Game" />
             </fieldset>
             <fieldset>
-              <input name="title" type="text" placeholder="Title" />
+              <input name="title" type="text" maxlength="140" placeholder="Title (hashtags supported)" />
             </fieldset>
             <fieldset>
-              <input name="evt" type="text" placeholder="Event" />
-            </fieldset>
-            <fieldset>
-              <input name="teams" placeholder="Team(s)" type="text" />
-            </fieldset>
-            <fieldset>
-              <input name="players" placeholder="Player(s)" type="text" />
-            </fieldset>
-            <fieldset>
-              <input name="characters" placeholder="Character(s)" type="text" />
-            </fieldset>
-            <fieldset>
-              <input name="free" placeholder="Free tag(s)" type="text" />
-            </fieldset>
-            <fieldset>
-              <input type="submit" name="submit" onclick="dataLayer.push({'event': 'gfyUploaded'});" value="Upload" /> <span class="muted">Thanks for contributing!</span><br>
+              <input type="submit" name="submit" onclick="_EST_.getHashtags();dataLayer.push({'event': 'gfyUploaded'});" value="Upload" /> <span class="muted">Thanks for contributing!</span><br>
+              <input name="free" type="text" hidden="true"/>
             </fieldset>
           </form>
         </div>
