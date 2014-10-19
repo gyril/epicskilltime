@@ -226,6 +226,12 @@ window._EST_ = {
           gameLink.setAttribute('href', document.location.origin + "/search.html?"+ game.textContent.replace(/\ /g,"+"))
       }
 
+      var facebook = document.createElement('a')
+      facebook.className = 'gif-list-facebook'
+      facebook.setAttribute('href', 'https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fepicskilltime.airhost.me%2Fgif.html%3F' + gif.id)
+      facebook.setAttribute('target', '_blank')
+      facebook.textContent = 'Facebook'
+
       var link = document.createElement('a')
       link.className = 'gif-list-link'
       link.setAttribute('data-link', _EST_.domain + '/gif.html?' + gif.id)
@@ -233,6 +239,7 @@ window._EST_ = {
         _EST_.copyLink(this.getAttribute('data-link'))
       }, false)
       link.textContent = 'Copy link'
+      links.appendChild(facebook)
       links.appendChild(link)
 
       container.appendChild(title)

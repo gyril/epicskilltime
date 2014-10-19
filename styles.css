@@ -13,7 +13,7 @@ ul, ol {
   padding: 0;
 }
 
-a, a:active, a:visited {
+a, a:active {
   color: #404241;
   text-decoration: none;
 }
@@ -267,6 +267,21 @@ a.gif-list-title-hashtag {
 }
 
 .gif-list-link:hover {
+  text-decoration: none;
+}
+
+.gif-list-facebook {
+  background: #397DF9;
+  margin-right: 10px;
+  color: white;
+  padding: 5px 10px 5px 10px;
+  border-radius: 2px;
+  font-weight: 300;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.gif-list-facebook:hover {
   text-decoration: none;
 }
 
