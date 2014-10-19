@@ -36,7 +36,7 @@
       <div class="container">
         <a href="./"><div id="logo">Epic<strong>Skill</strong>Time</div></a>
         <div id="search">
-          <input type="text" class="searchbox" placeholder="Game, player, event..."></input>
+          <input type="text" class="searchbox" placeholder="Game, player, hashtag..."></input>
           <div id="autocomplete"></div>
         </div>
         <div id="upload">
@@ -77,7 +77,7 @@
       _EST_.searchGifs(window.location.search.substr(1), function (data) {
         _EST_.queryGifList(data.hits.map(function (g) { return g.gif }), function(data) {
           var gifs = _EST_.tagListToGifList(data)
-          
+
           for (var i = 0; i < gifs.length; i++) {
             document.getElementById("left-column").appendChild(_EST_.templates.list(gifs[i]))
           }
