@@ -258,6 +258,7 @@ a.gif-list-title-hashtag {
   margin-right: 10px;
   float: right;
   top: -40px;
+  margin-bottom: -15px;
   width: 15px;
   height: 15px;
   padding: 5px;
@@ -296,6 +297,7 @@ a.gif-list-title-hashtag {
 .gif-list-links {
   text-align: right;
   margin-bottom: 4px;
+  clear: both;
 }
 
 .gif-list-link {
