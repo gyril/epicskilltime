@@ -234,7 +234,6 @@ window._EST_ = {
       video.appendChild(webmsrc)
 
       gifvid.setAttribute('data-id', gif.id)
-      gifvid.appendChild(video)
 
       var fast = document.createElement('div')
       fast.className = "gif-video-playbackrate"
@@ -255,6 +254,9 @@ window._EST_ = {
         fast.classList.add("selected-playback")
         slow.classList.remove("selected-playback")
       })
+
+      // append the playback elements before the video so that the're on top
+      gifvid.appendChild(video)
 
 
       for (var i = 0; i < gif.tags.length; i++) {

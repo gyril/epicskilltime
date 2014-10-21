@@ -245,7 +245,7 @@ a.gif-list-title-hashtag {
 
 .gif-list-gif {
   cursor: pointer;
-  margin: 10px 0px;
+  margin: 0px;
 }
 
 .gif-video-playbackrate {
@@ -257,7 +257,7 @@ a.gif-list-title-hashtag {
   right: 0;
   margin-right: 10px;
   float: right;
-  top: -40px;
+  top: 20px;
   margin-bottom: -15px;
   width: 15px;
   height: 15px;
@@ -296,6 +296,7 @@ a.gif-list-title-hashtag {
 
 .gif-list-links {
   text-align: right;
+  margin-top: 8px;
   margin-bottom: 4px;
   clear: both;
 }
