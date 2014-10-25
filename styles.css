@@ -94,6 +94,7 @@ fieldset select {
   background: none;
   -webkit-appearance: none;
   -moz-appearance: none;
+  background: url('./down-arrow.png') no-repeat right center;
 }
 
 fieldset select.dimmed {
