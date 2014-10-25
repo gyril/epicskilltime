@@ -52,18 +52,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <div class="card">
           <form id="add-form" method="post">
             <fieldset>
-              <input autofocus name="url" type="text" placeholder="Gfycat URL (only gfycat for now)" />
+              <input autofocus name="url" id="url" type="text" placeholder="Gfycat URL (only gfycat for now)" />
             </fieldset>
             <fieldset>
-              <select class="dimmed" name="game" type="text" />
+              <select class="dimmed" name="game" id="game" type="text" />
               <option value="" disabled selected>Game (list will be extended in the future)</option>
               </select>
             </fieldset>
             <fieldset>
-              <input name="title" type="text" maxlength="140" placeholder="Title (hashtags supported)" />
+              <input name="title" type="text" id="title" maxlength="140" placeholder="Title (hashtags supported)" />
             </fieldset>
             <fieldset>
-              <input type="submit" name="submit" onclick="_EST_.getHashtags();dataLayer.push({'event': 'gfyUploaded'});" value="Upload" /> <span class="muted">Thanks for contributing!</span><br>
+              <input type="submit" name="submit" onclick="dataLayer.push({'event': 'gfyUploaded'});" value="Upload" /> <span class="muted">Thanks for contributing!</span><br>
               <input name="free" type="text" hidden="true"/>
             </fieldset>
           </form>
@@ -72,7 +72,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     </div>
 
     <script type="text/javascript">
-      document.getElementById('add-form').action = _EST_.APIdomain + '/add'
+      var form = document.getElementById('add-form')
+      form.action = _EST_.APIdomain + '/add'
+      form.addEventListener('submit', function (e) {
+        var game = document.getElementById('game')
+          , title = document.getElementById('title')
+          , url = document.getElementById('url')
+
+        if (game.value == '' || title.value == '' || url.value == '') {
+          e.preventDefault()
+          alert('Game over: all fields must be filled!')
+        } else {
+          _EST_.getHashtags();
+        }
+      }, false)
 
       _EST_.selectGames(function(lGames){
 
