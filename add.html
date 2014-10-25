@@ -82,6 +82,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         if (game.value == '' || title.value == '' || url.value == '') {
           e.preventDefault()
           alert('Game over: all fields must be filled!')
+        } else if (url.value.indexOf('gfycat.com') == -1) {
+          e.preventDefault()
+          alert('Game over: link must be a gfycat URL!')
         } else {
           _EST_.getHashtags();
         }
