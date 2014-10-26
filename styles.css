@@ -252,7 +252,8 @@ a.gif-list-title-hashtag {
 .gif-video-playbackrate {
   font-size: 12px;
   border-radius: 13px;
-  background-color: white;
+  background-color: #397DF9;
+  color: white;
   position: relative;
   bottom: 0;
   right: 0;

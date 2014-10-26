@@ -244,6 +244,13 @@ window._EST_ = {
       slow.className = "gif-video-playbackrate"
       slow.textContent = "x½"
       gifvid.appendChild(slow)
+      var minus_two = document.createElement('div')
+      minus_two.className = "gif-video-playbackrate"
+      minus_two.textContent = "-2s"
+      gifvid.appendChild(minus_two)
+      minus_two.addEventListener('click', function(e){
+        video.currentTime = video.currentTime - 2;
+      })
       slow.addEventListener('click', function(e){
         video.playbackRate = 0.4
         slow.classList.add("selected-playback")
