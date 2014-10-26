@@ -9,10 +9,6 @@ window._EST_ = {
     this.APIdomain = this.env == 'prod' ? 'http://epicskilltime.herokuapp.com' : 'http://localhost:7777'
   },
 
-  denis: function(){
-    return 'boloss';
-  },
-
   listen: function () {
     // tags
     document.addEventListener('click', function (e) {
