@@ -95,6 +95,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         var gameSelector = document.getElementsByName('game')[0]
         gameSelector.addEventListener('change', function(e){
           this.classList.remove('dimmed')
+          if (this.value == "Other...") {
+            if (confirm("Hey, we'd love to know from you what games you want to see in epic gifs. Tell us via email!")) {
+              window.location.href = "mailto:ggwping@gmail.com?subject=Please add my favourite game!"
+            }
+            this.selectedIndex = 0
+            this.classList.add('dimmed')
+          }
         })
 
         var lGameNames = []
@@ -114,6 +121,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             gameSelector.appendChild(option)
           }
         }
+        var option = document.createElement('option')
+        option.value = "Other..."
+        option.textContent = "Other..."
+        gameSelector.appendChild(option)
 
       })
       _EST_.listen()
