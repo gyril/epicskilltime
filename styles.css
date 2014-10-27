@@ -387,7 +387,11 @@ a.feedback {
   display: inline-block;
   background-color: #fff200;
   padding: 10px;
+  -ms-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
   -webkit-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  transform: rotate(-90deg);
   position: fixed;
   top: 300px;
   left: -27px;
