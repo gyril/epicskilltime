@@ -364,6 +364,16 @@ window._EST_ = {
       }
 
       return container
+    },
+
+    feedback: function() {
+      var main = document.getElementById('main')
+      var feedback_label = document.createElement('a')
+      feedback_label.setAttribute('href', "mailto:ggwping@gmail.com?subject=Some feedback about your site!")
+      feedback_label.setAttribute('target', "_blank")
+      feedback_label.className = "feedback"
+      feedback_label.textContent = "Feedback"
+      main.appendChild(feedback_label)
     }
   },
 
