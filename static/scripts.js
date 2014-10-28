@@ -5,7 +5,7 @@ window._EST_ = {
 
 
   init: function () {
-    this.domain = this.env == 'prod' ? 'http://epicskilltime.airhost.me' : 'http://localhost:1337/epicskilltime'
+    this.domain = this.env == 'prod' ? 'http://www.epicskilltime.com' : 'http://localhost:1337/epicskilltime'
     this.APIdomain = this.env == 'prod' ? 'http://epicskilltime.herokuapp.com' : 'http://localhost:7777'
   },
 
