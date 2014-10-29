@@ -51,83 +51,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <h1>Add an epic play</h1>
 
         <div class="card">
-          <form id="add-form" method="post">
-            <fieldset>
-              <input autofocus name="url" id="url" type="text" placeholder="Gfycat URL (only gfycat for now)" />
-            </fieldset>
-            <fieldset>
-              <select class="dimmed" name="game" id="game" type="text" />
-              <option value="" disabled selected>Game (list will be extended in the future)</option>
-              </select>
-            </fieldset>
-            <fieldset>
-              <input name="title" type="text" id="title" maxlength="140" placeholder="Title (hashtags supported)" />
-            </fieldset>
-            <fieldset>
-              <input type="submit" name="submit" onclick="dataLayer.push({'event': 'gfyUploaded'});" value="Upload" /> <span class="muted">Thanks for contributing!</span><br>
-              <input name="free" type="text" hidden="true"/>
-            </fieldset>
-          </form>
+          <div id="add-form">
+          </div>
         </div>
       </div>
     </div>
 
     <script type="text/javascript">
-      var form = document.getElementById('add-form')
-      form.action = _EST_.APIdomain + '/add'
-      form.addEventListener('submit', function (e) {
-        var game = document.getElementById('game')
-          , title = document.getElementById('title')
-          , url = document.getElementById('url')
-
-        if (game.value == '' || title.value == '' || url.value == '') {
-          e.preventDefault()
-          alert('Game over: all fields must be filled!')
-        } else if (url.value.indexOf('gfycat.com') == -1) {
-          e.preventDefault()
-          alert('Game over: link must be a gfycat URL!')
-        } else {
-          _EST_.getHashtags();
-        }
-      }, false)
-
-      _EST_.selectGames(function(lGames){
-
-        var gameSelector = document.getElementsByName('game')[0]
-        gameSelector.addEventListener('change', function(e){
-          this.classList.remove('dimmed')
-          if (this.value == "Other...") {
-            if (confirm("Hey, we'd love to know from you what games you want to see in epic gifs. Tell us via email!")) {
-              window.location.href = "mailto:ggwping@gmail.com?subject=Please add my favourite game!"
-            }
-            this.selectedIndex = 0
-            this.classList.add('dimmed')
-          }
-        })
-
-        var lGameNames = []
-
-        for (var i=0, iLength = lGames.length; i < iLength; i++) {
-          var sGame = lGames[i].content
-          lGameNames.push(sGame)
-        }
-
-        lGameNames.sort()
-        for (var i=0, iLength = lGameNames.length; i < iLength; i++) {
-          var sGame = lGameNames[i]
-          if (sGame != "") {
-            var option = document.createElement('option')
-            option.value = sGame
-            option.textContent = sGame
-            gameSelector.appendChild(option)
-          }
-        }
-        var option = document.createElement('option')
-        option.value = "Other..."
-        option.textContent = "Other..."
-        gameSelector.appendChild(option)
-
-      })
+      document.getElementById('add-form').appendChild(_EST_.templates.form())
       _EST_.listen()
       _EST_.templates.feedback()
     </script>

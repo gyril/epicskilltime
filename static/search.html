@@ -53,21 +53,11 @@
 
         </div>
         <div id="right-column">
-          <h1 style="text-align: right">Placeholder</h1>
-
           <div class="card">
-            <div class="card-title">GAMES</div>
-            <ul>
-              <li><a href="./search.html?Dota2"><img title="Dota 2" class="thumbnail" src="./dota2.jpg" /></a></li>
-              <li><a href="./search.html?LoL"><img title="League of Legends" class="thumbnail" src="./lol.jpg" /></a></li>
-              <li><a href="./search.html?SSBM"><img title="Super Smash Bros: Melee" class="thumbnail" src="./ssbm.jpg" /></a></li>
-              <li><a href="./search.html?CSGO"><img title="Counter Strike: Global Offensive" class="thumbnail" src="./csgo.jpg" /></a></li>
-              <li><a href="./search.html?CS16"><img title="Counter Strike 1.6" class="thumbnail" src="./cs16.jpg" /></a></li>
-              <li><a href="./search.html?super+meat+boy"><img title="SuperMeatBoy" class="thumbnail" src="./supermeatboy.jpg" /></a></li>
-              <li><a href="./search.html?Canvas+Rider"><img title="Canvas Rider" class="thumbnail" src="./canvas_rider.jpg" /></a></li>
-            </ul>
+            <h1 id="game-form-title"></h1>
+            <div id="game-form">
+            </div>
           </div>
-
         </div>
       </div>
     </div>
@@ -79,9 +69,18 @@
         _EST_.queryGifList(data.hits.map(function (g) { return g.gif }), function(data) {
           var gifs = _EST_.tagListToGifList(data)
 
+          var sPreviousGifGame = (gifs.length > 0) ? _EST_.getGame(gifs[0]) : "";
+          var bSameGame = true
           for (var i = 0; i < gifs.length; i++) {
             document.getElementById("left-column").appendChild(_EST_.templates.list(gifs[i]))
+            bSameGame = (bSameGame && _EST_.getGame(gifs[i]) == sPreviousGifGame)
+            sPreviousGifGame = _EST_.getGame(gifs[i])
           }
+
+          var sGame = bSameGame ? sPreviousGifGame : null
+          document.getElementById("game-form").appendChild(_EST_.templates.form(sGame))
+          var formTitle = document.getElementById('game-form-title');
+          formTitle.textContent = (sGame) ? 'Add your epic play for ' + sGame : 'Add your epic play!'
         })
       })
 

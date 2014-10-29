@@ -363,11 +363,18 @@ window._EST_ = {
       title_input.setAttribute("placeholder","Title (hashtags supported!)")
       title_field.appendChild(title_input)
       // game
-      var game_input = document.createElement('input')
-      game_input.setAttribute("name", "game")
-      game_input.setAttribute("id", "game")
-      game_input.setAttribute("value", game)
-      game_input.setAttribute("hidden", true)
+      var game_select = document.createElement('select')
+      game_select.setAttribute("name", "game")
+      game_select.setAttribute("id", "game")
+      game_select.setAttribute("type", "text")
+      if (game) {
+        game_select.setAttribute("value", game)
+        game_select.setAttribute("hidden", true)
+      } else {
+        _EST_.selectGames(function(lGames){
+          _EST_.fillDropdown(game_select, lGames)
+        })
+      }
       // free tags
       var free_input = document.createElement('input')
       free_input.setAttribute("name", "free")
@@ -383,7 +390,13 @@ window._EST_ = {
 
       form.appendChild(gif_field)
       form.appendChild(title_field)
-      form.appendChild(game_input)
+      if (game) {
+        form.appendChild(game_select)
+      } else {
+        var game_field = document.createElement('fieldset')
+        game_field.appendChild(game_select)
+        form.appendChild(game_field)
+      }
       form.appendChild(free_input)
       form.appendChild(submit_field)
 
@@ -439,6 +452,49 @@ window._EST_ = {
       feedback_label.textContent = "Feedback"
       main.appendChild(feedback_label)
     }
+  },
+
+  fillDropdown: function (dropdown, lGames) {
+    var placeholder = document.createElement("option")
+    placeholder.setAttribute('value', '')
+    placeholder.setAttribute('disabled', 'true')
+    placeholder.setAttribute('selected', 'true')
+    placeholder.textContent = 'Game (list will be extended)'
+    dropdown.appendChild(placeholder)
+    dropdown.classList.add('dimmed')
+
+    dropdown.addEventListener('change', function(e){
+      this.classList.remove('dimmed')
+      if (this.value == "Other...") {
+        if (confirm("Hey, we'd love to know from you what games you want to see in epic gifs. Tell us via email!")) {
+          window.location.href = "mailto:ggwping@gmail.com?subject=Please add my favourite game!"
+        }
+        this.selectedIndex = 0
+        this.classList.add('dimmed')
+      }
+    })
+
+    var lGameNames = []
+
+    for (var i=0, iLength = lGames.length; i < iLength; i++) {
+      var sGame = lGames[i].content
+      lGameNames.push(sGame)
+    }
+
+    lGameNames.sort()
+    for (var i=0, iLength = lGameNames.length; i < iLength; i++) {
+      var sGame = lGameNames[i]
+      if (sGame != "") {
+        var option = document.createElement('option')
+        option.value = sGame
+        option.textContent = sGame
+        dropdown.appendChild(option)
+      }
+    }
+    var option = document.createElement('option')
+    option.value = "Other..."
+    option.textContent = "Other..."
+    dropdown.appendChild(option)
   },
 
   ogTags: function (gif) {
