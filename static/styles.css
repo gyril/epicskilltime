@@ -44,6 +44,8 @@ input[type=submit], button {
 }
 
 fieldset {
+  margin-right: 10px;
+  padding-left: 0;
   border: none;
 }
 
@@ -56,7 +58,8 @@ fieldset input[type=text] {
   line-height: 20px;
   font-size: 16px;
   padding: 10px;
-  width: 450px;
+  width: 100%;
+  max-width: 450px;
   border: 1px solid #AAA;
   border-radius: 2px;
   font-family: Raleway, Open Sans, sans-serif;
@@ -355,8 +358,13 @@ a.gif-list-title-hashtag {
 }
 
 #add-form {
-  width: 500px;
+  width: 100%;
+  max-width: 500px;
   margin: 0 auto;
+}
+
+#game-form-title {
+  text-align: center;
 }
 
 a.game-gate-link {

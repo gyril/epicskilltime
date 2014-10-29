@@ -51,12 +51,11 @@
         <div id="left-column">
         </div>
         <div id="right-column">
-          <h1 style="text-align: right">Placeholder</h1>
-
-          <div class="card" id="metadata">
-
+          <div class="card">
+            <h1 id="game-form-title"></h1>
+            <div id="game-form">
+            </div>
           </div>
-
         </div>
       </div>
     </div>
@@ -68,7 +67,6 @@
         var gif = _EST_.tagListToGifList(data)[0]
           , head = document.getElementsByTagName("head")[0]
           , ogTags = _EST_.ogTags(gif)
-
         document.getElementById("left-column").appendChild(_EST_.templates.list(gif))
         document.getElementById("left-column").appendChild(_EST_.templates.gameGate(gif))
 
@@ -78,7 +76,9 @@
         uploadGif.textContent = "or Upload yours"
         document.getElementById("left-column").appendChild(uploadGif)
 
-        document.getElementById("metadata").appendChild(_EST_.templates.metadata(_EST_.tagListToTagTypes(gif.tags)))
+        document.getElementById("game-form").appendChild(_EST_.templates.form(_EST_.getGame(gif)))
+        var formTitle = document.getElementById('game-form-title');
+        formTitle.textContent = 'Add your epic play for ' + _EST_.getGame(gif)
 
         console.log(gif)
         for (var i in ogTags) {

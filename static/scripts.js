@@ -342,6 +342,70 @@ window._EST_ = {
       return container
     },
 
+    form: function(game) {
+      var form = document.createElement('form')
+      form.setAttribute('id','add-form')
+      form.setAttribute('method','post')
+      // gif url
+      var gif_field = document.createElement('fieldset')
+      var gif_input = document.createElement('input')
+      gif_input.setAttribute("name","url")
+      gif_input.setAttribute("id","url")
+      gif_input.setAttribute("type","text")
+      gif_input.setAttribute("placeholder","Gfycat url (only gfycat for now)")
+      gif_field.appendChild(gif_input)
+      // title
+      var title_field = document.createElement('fieldset')
+      var title_input = document.createElement('input')
+      title_input.setAttribute("name","title")
+      title_input.setAttribute("id","title")
+      title_input.setAttribute("type","text")
+      title_input.setAttribute("placeholder","Title (hashtags supported!)")
+      title_field.appendChild(title_input)
+      // game
+      var game_input = document.createElement('input')
+      game_input.setAttribute("name", "game")
+      game_input.setAttribute("id", "game")
+      game_input.setAttribute("value", game)
+      game_input.setAttribute("hidden", true)
+      // free tags
+      var free_input = document.createElement('input')
+      free_input.setAttribute("name", "free")
+      free_input.setAttribute("hidden", true)
+      // submit
+      var submit_field = document.createElement('fieldset')
+      var submit_button = document.createElement('input')
+      submit_button.setAttribute("type","submit")
+      submit_button.setAttribute("name","submit")
+      submit_button.setAttribute("onclick","dataLayer.push({'event': 'gfyUploaded'});")
+      submit_button.setAttribute("value","Upload")
+      submit_field.appendChild(submit_button)
+
+      form.appendChild(gif_field)
+      form.appendChild(title_field)
+      form.appendChild(game_input)
+      form.appendChild(free_input)
+      form.appendChild(submit_field)
+
+      form.action = _EST_.APIdomain + '/add'
+      form.addEventListener('submit', function (e) {
+        var game = document.getElementById('game')
+          , title = document.getElementById('title')
+          , url = document.getElementById('url')
+
+        if (title.value == '' || url.value == '') {
+          e.preventDefault()
+          alert('Game over: all fields must be filled!')
+        } else if (url.value.indexOf('gfycat.com') == -1) {
+          e.preventDefault()
+          alert('Game over: link must be a gfycat URL!')
+        } else {
+          _EST_.getHashtags();
+        }
+      }, false)
+      return form
+    },
+
     autocomplete: function (results) {
       var container = document.createElement('div')
 
@@ -432,6 +496,14 @@ window._EST_ = {
     }
 
     return types
+  },
+
+  getGame: function(gif) {
+    var tags = gif.tags
+    for (var i = 0; i < tags.length; i++) {
+      var tag = tags[i]
+      if (tag.type == "game") return tag.content
+    }
   },
 
   infiniteScroll: function () {
