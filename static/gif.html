@@ -80,6 +80,8 @@
         var formTitle = document.getElementById('game-form-title');
         formTitle.textContent = 'Add your epic play for ' + _EST_.getGame(gif)
 
+        document.getElementById('logo').parentNode.href += "search.html?" + _EST_.getGame(gif).replace(/\ /g,"+")
+
         console.log(gif)
         for (var i in ogTags) {
           var meta = document.createElement("meta")
