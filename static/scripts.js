@@ -273,7 +273,7 @@ window._EST_ = {
 
       var facebook = document.createElement('a')
       facebook.className = 'gif-list-facebook'
-      facebook.setAttribute('href', 'https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fepicskilltime.airhost.me%2Fgif.html%3F' + gif.id)
+      facebook.setAttribute('href', 'https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.epicskilltime.com%2Fgif.html%3F' + gif.id)
       facebook.setAttribute('target', '_blank')
       facebook.textContent = 'Facebook'
 
