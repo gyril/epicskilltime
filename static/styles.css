@@ -413,6 +413,7 @@ a.feedback:hover {
 .thumbnail_li {
   float: left;
   margin-right: 20px;
+  height: 136px;
 }
 
 .thumbnail_li:last {
