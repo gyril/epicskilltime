@@ -354,7 +354,7 @@ a.gif-list-title-hashtag {
 
 .thumbnail {
   margin-top: 20px;
-  width: 330px;
+  width: 180px;
 }
 
 #add-form {
@@ -408,4 +408,13 @@ a.feedback {
 
 a.feedback:hover {
   text-decoration: none;
+}
+
+.thumbnail_li {
+  float: left;
+  margin-right: 20px;
+}
+
+.thumbnail_li:last {
+  margin-right: 0;
 }

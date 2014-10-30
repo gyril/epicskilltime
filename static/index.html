@@ -49,23 +49,18 @@
     <div id="main">
       <div class="container">
         <div id="left-column">
-          <h1>Trending gifs</h1>
-
+          <h1>CHOOSE YOUR GAME</h1>
+          <ul>
+            <li class="thumbnail_li"><a href="./search.html?Dota2"><img title="Dota 2" class="thumbnail" src="./dota2.jpg" /></a></li>
+            <li class="thumbnail_li"><a href="./search.html?LoL"><img title="League of Legends" class="thumbnail" src="./lol.jpg" /></a></li>
+            <li class="thumbnail_li"><a href="./search.html?SSBM"><img title="Super Smash Bros: Melee" class="thumbnail" src="./ssbm.jpg" /></a></li>
+            <li class="thumbnail_li"><a href="./search.html?CSGO"><img title="Counter Strike: Global Offensive" class="thumbnail" src="./csgo.jpg" /></a></li>
+            <li class="thumbnail_li"><a href="./search.html?FIFA+15"><img title="FIFA 15" class="thumbnail" src="./fifa15.jpg" /></a></li>
+          </ul>
         </div>
         <div id="right-column">
-          <h1 style="text-align: right">Placeholder</h1>
-
           <div class="card">
-            <div class="card-title">GAMES</div>
-            <ul>
-              <li><a href="./search.html?Dota2"><img title="Dota 2" class="thumbnail" src="./dota2.jpg" /></a></li>
-              <li><a href="./search.html?LoL"><img title="League of Legends" class="thumbnail" src="./lol.jpg" /></a></li>
-              <li><a href="./search.html?SSBM"><img title="Super Smash Bros: Melee" class="thumbnail" src="./ssbm.jpg" /></a></li>
-              <li><a href="./search.html?CSGO"><img title="Counter Strike: Global Offensive" class="thumbnail" src="./csgo.jpg" /></a></li>
-              <li><a href="./search.html?CS16"><img title="Counter Strike 1.6" class="thumbnail" src="./cs16.jpg" /></a></li>
-              <li><a href="./search.html?super+meat+boy"><img title="SuperMeatBoy" class="thumbnail" src="./supermeatboy.jpg" /></a></li>
-              <li><a href="./search.html?Canvas+Rider"><img title="Canvas Rider" class="thumbnail" src="./canvas_rider.jpg" /></a></li>
-            </ul>
+            <div class="card-title">RANDOM GIF</div>
           </div>
 
         </div>
@@ -75,21 +70,7 @@
     <script type="text/javascript">
       _EST_.listen()
 
-      _EST_.queryGifs({
-        order: 'latest',
-        number: 10,
-        callback: function (data) {
-          var gifs = _EST_.tagListToGifList(data)
-
-          for (var i in gifs) {
-            var gif = gifs[i]
-
-            document.getElementById("left-column").appendChild(_EST_.templates.list(gif))
-          }
-
-          _EST_.infiniteScroll()
-        }
-      })
+      //(TODO)Query a random gif
 
       _EST_.templates.feedback()
     </script>
