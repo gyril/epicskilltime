@@ -5,6 +5,7 @@ html, body {
   height: 100%;
   color: #404241;
   font-family: Raleway, Open Sans, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
 
 ul, ol {
@@ -26,6 +27,24 @@ h1 {
   text-transform: uppercase;
   font-size: 20px;
   font-weight: 900;
+}
+
+#tagline {
+  color: #666;
+  text-transform: none;
+  text-align: center;
+  font-size: 50px;
+  margin: 10px;
+}
+
+#subtagline {
+  color: #666;
+  text-transform: none;
+  text-align: center;
+  font-size: 30px;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  font-weight: normal;
 }
 
 input[type=submit], button {
@@ -412,14 +431,35 @@ a.feedback:hover {
 
 .thumbnail_li {
   float: left;
+  margin-left: 20px;
   margin-right: 20px;
   height: 136px;
 }
 
-.thumbnail_li:last {
-  margin-right: 0;
+#top-column {
+  width: 660px;
+  margin: auto;
+}
+
+#bottom-column {
+  width: 660px;
+  margin: auto;
+  margin-top: 20px;
+  position: relative;
+  top: 60px;
+  margin-bottom: 80px;
+}
+
+#line {
+  width: 200px;
+  margin: auto;
+  clear: both;
+  border-top: solid 1px #AAA;
+  border-bottom: solid 1px #EFEFEF;
+  position: relative;
+  top: 50px;
 }
 
 .random_gif_video video {
-  width: 330px;
+  width: 640px;
 }

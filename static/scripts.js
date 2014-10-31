@@ -74,7 +74,9 @@ window._EST_ = {
         window.setTimeout(_EST_.hideAutocomplete, 300)
       }, false)
     }
+  },
 
+  autoPlayPause: function() {
     // play pause gifs
     this.intervals.push(window.setInterval(function () {
       var videos = document.getElementsByTagName('video')

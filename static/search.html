@@ -65,6 +65,7 @@
 
     <script type="text/javascript">
       _EST_.listen()
+      _EST_.autoPlayPause()
 
       _EST_.searchGifs(window.location.search.substr(1), function (data) {
         _EST_.queryGifList(data.hits.map(function (g) { return g.gif }), function(data) {
