@@ -186,24 +186,72 @@ window._EST_ = {
     })
   },
 
+  queryRandomGif: function (callback) {
+    if (this.isQuerying)
+      return
+
+    var xhr = new XMLHttpRequest()
+    xhr.open('GET', this.APIdomain + '/random/1', true)
+
+    xhr.onload = function(e) {
+      if (this.status == 200) {
+        _EST_.isQuerying = false
+        callback(JSON.parse(this.responseText))
+      }
+    }
+
+    this.isQuerying = true
+    xhr.send()
+  },
+
   templates: {
 
     list: function (gif) {
       var container = document.createElement('div')
       container.className = 'gif-list card'
 
+      container.appendChild(_EST_.templates.gifTitle(gif))
+      container.appendChild(_EST_.templates.gifGameLink(gif))
+      container.appendChild(_EST_.templates.gifVideo(gif))
+      container.appendChild(_EST_.templates.gifLinks(gif))
+
+      return container
+    },
+
+    gifTitle: function(gif) {
       var title = document.createElement('div')
-        , game = document.createElement('div')
-        , gifvid = document.createElement('div')
-        , links = document.createElement('div')
 
       title.className = 'gif-list-title'
-      game.className = 'gif-list-game'
-      gifvid.className = 'gif-list-gif'
-      links.className = 'gif-list-links'
 
       title.textContent = gif.title
       title.innerHTML = title.textContent.replace(/\#([a-z0-9\-\_]*)/ig, "<a href="+_EST_.domain+"/search.html?$1 class='gif-list-title-hashtag'>#$1</a>")
+
+      return title
+    },
+
+    gifGameLink: function(gif) {
+      var game = document.createElement('div')
+
+      game.className = 'gif-list-game'
+
+      for (var i = 0; i < gif.tags.length; i++) {
+        var tag = gif.tags[i]
+        if (tag.type == 'game')
+          game.textContent = tag.content
+          var gameLink = document.createElement('a')
+          gameLink.className = "gif-list-game-link"
+          gameLink.setAttribute('href', _EST_.domain + "/search.html?"+ game.textContent.replace(/\ /g,"+"))
+      }
+
+      gameLink.appendChild(game)
+
+      return gameLink
+    },
+
+    gifVideo:function(gif) {
+      var gifvid = document.createElement('div')
+
+      gifvid.className = 'gif-list-gif'
 
       var video = document.createElement('video')
 
@@ -261,15 +309,13 @@ window._EST_ = {
       // append the playback elements before the video so that the're on top
       gifvid.appendChild(video)
 
+      return gifvid
+    },
 
-      for (var i = 0; i < gif.tags.length; i++) {
-        var tag = gif.tags[i]
-        if (tag.type == 'game')
-          game.textContent = tag.content
-          var gameLink = document.createElement('a')
-          gameLink.className = "gif-list-game-link"
-          gameLink.setAttribute('href', _EST_.domain + "/search.html?"+ game.textContent.replace(/\ /g,"+"))
-      }
+    gifLinks:function(gif) {
+      var links = document.createElement('div')
+
+      links.className = 'gif-list-links'
 
       var facebook = document.createElement('a')
       facebook.className = 'gif-list-facebook'
@@ -287,13 +333,7 @@ window._EST_ = {
       links.appendChild(facebook)
       links.appendChild(link)
 
-      container.appendChild(title)
-      container.appendChild(gameLink)
-      gameLink.appendChild(game)
-      container.appendChild(gifvid)
-      container.appendChild(links)
-
-      return container
+      return links
     },
 
     gameGate: function (gif) {

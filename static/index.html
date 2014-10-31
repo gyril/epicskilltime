@@ -59,7 +59,7 @@
           </ul>
         </div>
         <div id="right-column">
-          <div class="card">
+          <div class="card" id="random-gif">
             <div class="card-title">RANDOM GIF</div>
           </div>
 
@@ -70,7 +70,19 @@
     <script type="text/javascript">
       _EST_.listen()
 
-      //(TODO)Query a random gif
+      //Query a random gif
+      _EST_.queryRandomGif(function(data){
+        var gif = _EST_.tagListToGifList(data)[0]
+
+        var randomGifCard = document.getElementById("random-gif")
+        randomGifCard.appendChild(_EST_.templates.gifTitle(gif))
+        randomGifCard.appendChild(_EST_.templates.gifGameLink(gif))
+        var video = _EST_.templates.gifVideo(gif)
+        video.classList.add('random_gif_video')
+        randomGifCard.appendChild(video)
+        randomGifCard.appendChild(_EST_.templates.gifLinks(gif))
+
+      })
 
       _EST_.templates.feedback()
     </script>

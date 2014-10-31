@@ -419,3 +419,7 @@ a.feedback:hover {
 .thumbnail_li:last {
   margin-right: 0;
 }
+
+.random_gif_video video {
+  width: 330px;
+}
