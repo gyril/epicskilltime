@@ -463,3 +463,8 @@ a.feedback:hover {
 .random_gif_video video {
   width: 640px;
 }
+
+#footer {
+  text-align: center;
+  font-size: 10px;
+}
