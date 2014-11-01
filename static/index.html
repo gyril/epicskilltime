@@ -57,6 +57,7 @@
             <li class="thumbnail_li"><a href="./search.html?SSBM"><img title="Super Smash Bros: Melee" class="thumbnail" src="./ssbm.jpg" /></a></li>
             <li class="thumbnail_li"><a href="./search.html?CSGO"><img title="Counter Strike: Global Offensive" class="thumbnail" src="./csgo.jpg" /></a></li>
             <li class="thumbnail_li"><a href="./search.html?FIFA+15"><img title="FIFA 15" class="thumbnail" src="./fifa15.jpg" /></a></li>
+            <li class="thumbnail_li" id="other_games"><a href="#"><img title="Other games" class="thumbnail" src="./casual.jpg" /></a></li>
           </ul>
         </div>
         <div id="line"></div>
@@ -86,6 +87,12 @@
         randomGifCard.appendChild(video)
         randomGifCard.appendChild(_EST_.templates.gifLinks(gif))
 
+      })
+
+      document.getElementById("other_games").addEventListener('click', function(e){
+        if (confirm("Howdy, we started with a short list but we want to know which games you want to see next. Tell us via email :)")) {
+          window.location.href = "mailto:ggwping@gmail.com?subject=Please add my favourite game!"
+        }
       })
 
       _EST_.templates.feedback()
