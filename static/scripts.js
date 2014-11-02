@@ -389,23 +389,26 @@ window._EST_ = {
       gif_input.setAttribute("name","url")
       gif_input.setAttribute("id","url")
       gif_input.setAttribute("type","text")
-      gif_input.setAttribute("placeholder","Gfycat url (only gfycat for now)")
+      gif_input.setAttribute("placeholder","Youtube url")
       gif_field.appendChild(gif_input)
       // start_time
       var start_time_field = document.createElement('fieldset')
+      start_time_field.classList.add('float')
       var start_time_input = document.createElement('input')
+      start_time_input.classList.add('time')
       start_time_input.setAttribute("name","start_time")
       start_time_input.setAttribute("id","start_time")
       start_time_input.setAttribute("type","text")
-      start_time_input.setAttribute("placeholder","start time (s)")
+      start_time_input.setAttribute("placeholder","start time (sec)")
       start_time_field.appendChild(start_time_input)
       // length
       var length_field = document.createElement('fieldset')
       var length_input = document.createElement('input')
+      length_input.classList.add('time')
       length_input.setAttribute("name","length")
       length_input.setAttribute("id","length")
       length_input.setAttribute("type","text")
-      length_input.setAttribute("placeholder","length (s) - max 15")
+      length_input.setAttribute("placeholder","length (max 15sec)")
       length_field.appendChild(length_input)
       // title
       var title_field = document.createElement('fieldset')
@@ -463,7 +466,25 @@ window._EST_ = {
           , start = document.getElementById('start_time')
           , length = document.getElementById('length')
 
-        if (title.value == '' || url.value == '') {
+        if (parseInt(start.value).toString() != start.value || parseInt(length.value).toString() != length.value) {
+          e.preventDefault()
+          alert('Please only enter numbers in the time fields')
+          return
+        }
+
+        if (parseInt(length.value) > 15) {
+          e.preventDefault
+          alert('15s max length')
+          return
+        }
+
+        if (parseInt(start.value) < 0 || parseInt(length.value) < 0) {
+          e.preventDefault
+          alert('Please enter positive numbers')
+          return
+        }
+
+        if (title.value == '' || url.value == '' || start.value == '' || length.value == '') {
           e.preventDefault()
           alert('Game over: all fields must be filled!')
         } else {
