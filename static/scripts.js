@@ -391,6 +391,22 @@ window._EST_ = {
       gif_input.setAttribute("type","text")
       gif_input.setAttribute("placeholder","Gfycat url (only gfycat for now)")
       gif_field.appendChild(gif_input)
+      // start_time
+      var start_time_field = document.createElement('fieldset')
+      var start_time_input = document.createElement('input')
+      start_time_input.setAttribute("name","start_time")
+      start_time_input.setAttribute("id","start_time")
+      start_time_input.setAttribute("type","text")
+      start_time_input.setAttribute("placeholder","start time (s)")
+      start_time_field.appendChild(start_time_input)
+      // length
+      var length_field = document.createElement('fieldset')
+      var length_input = document.createElement('input')
+      length_input.setAttribute("name","length")
+      length_input.setAttribute("id","length")
+      length_input.setAttribute("type","text")
+      length_input.setAttribute("placeholder","length (s) - max 15")
+      length_field.appendChild(length_input)
       // title
       var title_field = document.createElement('fieldset')
       var title_input = document.createElement('input')
@@ -426,6 +442,8 @@ window._EST_ = {
       submit_field.appendChild(submit_button)
 
       form.appendChild(gif_field)
+      form.appendChild(start_time_field)
+      form.appendChild(length_field)
       form.appendChild(title_field)
       if (game) {
         form.appendChild(game_select)
@@ -442,15 +460,16 @@ window._EST_ = {
         var game = document.getElementById('game')
           , title = document.getElementById('title')
           , url = document.getElementById('url')
+          , start = document.getElementById('start_time')
+          , length = document.getElementById('length')
 
         if (title.value == '' || url.value == '') {
           e.preventDefault()
           alert('Game over: all fields must be filled!')
-        } else if (url.value.indexOf('gfycat.com') == -1) {
-          e.preventDefault()
-          alert('Game over: link must be a gfycat URL!')
         } else {
-          _EST_.getHashtags();
+          e.preventDefault()
+          _EST_.getHashtags()
+          _EST_.encodeGif(url.value, start.value, length.value)
         }
       }, false)
       return form
@@ -733,6 +752,79 @@ window._EST_ = {
     capitalize: function (string) {
       return string[0].toUpperCase()+string.substring(1)
     }
+  },
+
+  encodeGif: function(link, start, length) {
+    if (link.indexOf('youtube.com/watch?v=') >= 0 || link.indexOf('youtu.be/') >= 0) {
+      var unique_key = Date.now()
+
+      var xhr = new XMLHttpRequest()
+      xhr.open('GET', "http://upload.gfycat.com/transcode/" + unique_key + "?fetchSeconds="+start+"&fetchLength="+length+"&fetchUrl=" + link, true)
+
+      xhr.onload = function(e) {
+        if (this.status == 200) {
+          var response = JSON.parse(this.responseText)
+          if (response.error && response.error.indexOf('Connection timeout') >= 0) {
+            _EST_.checkStatus(unique_key)
+          } else if (response.error = 'Url conversion already in progress.' && !response.gfyname) {
+            alert('Gif encoding already in progress')
+          } else if (response.error = 'Url conversion already in progress.' && !response.task == 'complete'){
+            alert('this gif already exists!')
+          } else if (response.error && response.error.indexOf('Sorry, please wait another') >= 0) {
+            alert('please allow 30s between two uploads')
+          } else if (response.task = 'complete') {
+            var gfycatUrl = 'http://www.gfycat.com/' + response.gfyname
+            _EST_.uploadGif(gfycatUrl)
+          }
+        }
+      }
+
+      xhr.send()
+    } else {
+      alert(':/ looks like this is not a supported youtube url, please check again')
+    }
+  },
+
+  checkStatus: function(unique_key) {
+    var xhr = new XMLHttpRequest()
+    xhr.open('GET', "http://upload.gfycat.com/status/" + unique_key, true)
+
+    xhr.onload = function(e) {
+      if (this.status == 200) {
+        var response = JSON.parse(this.responseText)
+        if (response.task == 'encoding') {
+          setTimeout(function(){
+            _EST_.checkStatus(unique_key)
+          }, 5000)
+        } else if (response.task == 'complete') {
+          var gfycatUrl = 'http://www.gfycat.com/' + response.gfyname
+          _EST_.uploadGif(gfycatUrl)
+        }
+      }
+    }
+
+    xhr.send()
+  },
+
+  uploadGif: function(gfycatUrl) {
+    var title = document.getElementsByName('title')[0].value
+    var url = gfycatUrl
+    var free = document.getElementsByName('free')[0].value
+    var game = document.getElementsByName('game')[0].value
+    var params = "title="+title+"&url="+url+"&free="+free+"&game="+game
+    var xhr = new XMLHttpRequest()
+    xhr.open('POST', _EST_.APIdomain + '/upload', true)
+    //Send the proper header information along with the request
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+    xhr.onload = function(e) {
+      if (this.status == 200) {
+        response = JSON.parse(this.responseText)
+        window.location.href = window.location.origin + "/search.html?" + response.game[0].replace(/\ /g, "+")
+      }
+    }
+
+    xhr.send(params);
   }
 }
 
