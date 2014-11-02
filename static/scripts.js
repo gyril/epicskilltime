@@ -592,11 +592,9 @@ window._EST_ = {
   },
 
   getGame: function(gif) {
-    console.log(gif)
     var tags = gif.tags
     for (var i = 0; i < tags.length; i++) {
       var tag = tags[i]
-      console.log(tag)
       if (tag.type == "game") return tag.content
     }
   },
