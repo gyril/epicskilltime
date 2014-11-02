@@ -258,6 +258,11 @@ fieldset.float {
   margin-bottom: 40px;
 }
 
+#fixed-card {
+  position: fixed;
+  width: 350px;
+}
+
 .gif-list {
   width: 600px;
 }
