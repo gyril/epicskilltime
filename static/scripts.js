@@ -528,6 +528,13 @@ window._EST_ = {
       feedback_label.className = "feedback"
       feedback_label.textContent = "Feedback"
       main.appendChild(feedback_label)
+    },
+
+    status: function(message) {
+      var statusText = document.createElement('div')
+      statusText.className = "status"
+      statusText.textContent = message
+      return statusText
     }
   },
 
@@ -777,6 +784,9 @@ window._EST_ = {
 
   encodeGif: function(link, start, length) {
     if (link.indexOf('youtube.com/watch?v=') >= 0 || link.indexOf('youtu.be/') >= 0) {
+      var status = this.templates.status("Now creating and uploading your epic play. This could take up to 2 min, please do not leave the page")
+      var form = document.getElementById('add-form')
+      form.appendChild(status);
       var unique_key = Date.now()
 
       var xhr = new XMLHttpRequest()
@@ -785,15 +795,22 @@ window._EST_ = {
       xhr.onload = function(e) {
         if (this.status == 200) {
           var response = JSON.parse(this.responseText)
+          console.log(response)
           if (response.error && response.error.indexOf('Connection timeout') >= 0) {
             _EST_.checkStatus(unique_key)
-          } else if (response.error = 'Url conversion already in progress.' && !response.gfyname) {
+          } else if (response.error == "Unable to retrieve video.  Sorry, fetching video from remote services doesn't always work!"){
+            status.remove()
+            alert('There was a problem fetching the video :( please try that again')
+          } else if (response.error == 'Url conversion already in progress.' && !response.gfyname) {
+            status.remove()
             alert('Gif encoding already in progress')
-          } else if (response.error = 'Url conversion already in progress.' && !response.task == 'complete'){
+          } else if (response.error == 'Url conversion already in progress.' && !response.task == 'complete'){
+            status.remove()
             alert('this gif already exists!')
           } else if (response.error && response.error.indexOf('Sorry, please wait another') >= 0) {
+            status.remove()
             alert('please allow 30s between two uploads')
-          } else if (response.task = 'complete') {
+          } else if (response.task == 'complete' || (!response.error && response.gfyname)) {
             var gfycatUrl = 'http://www.gfycat.com/' + response.gfyname
             _EST_.uploadGif(gfycatUrl)
           }

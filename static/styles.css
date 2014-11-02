@@ -480,6 +480,13 @@ a.feedback:hover {
   width: 640px;
 }
 
+.status {
+  font-size: 12px;
+  padding: 20px;
+  text-align: center;
+  width: 100%;
+}
+
 #footer {
   text-align: center;
   font-size: 10px;
