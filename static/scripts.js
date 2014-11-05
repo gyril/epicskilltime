@@ -116,6 +116,22 @@ window._EST_ = {
     xhr.send()
   },
 
+  updateTitle: function(title, id, callback) {
+    title = encodeURIComponent(title)
+    var xhr = new XMLHttpRequest()
+        xhr.open('GET', "http://localhost:7777/updatetitles/" + id + "/" + title, true)
+
+        xhr.onload = function(e) {
+          if (this.status == 200) {
+            _EST_.isQuerying = false
+            callback(JSON.parse(this.responseText))
+          }
+        }
+
+        this.isQuerying = true
+        xhr.send()
+  },
+
   isQuerying: false,
   currentOffset: 0,
   noGifLeft: false,
