@@ -119,17 +119,19 @@ window._EST_ = {
   updateTitle: function(title, id, callback) {
     title = encodeURIComponent(title)
     var xhr = new XMLHttpRequest()
-        xhr.open('GET', this.APIdomain + "/updatetitles/" + id + "/" + title, true)
+    xhr.open('GET', this.APIdomain + "/updatetitles/" + id + "/" + title, true)
+    //Send the proper header information along with the request
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
-        xhr.onload = function(e) {
-          if (this.status == 200) {
-            _EST_.isQuerying = false
-            callback(JSON.parse(this.responseText))
-          }
-        }
+    xhr.onload = function(e) {
+      if (this.status == 200) {
+        _EST_.isQuerying = false
+        callback(JSON.parse(this.responseText))
+      }
+    }
 
-        this.isQuerying = true
-        xhr.send()
+    this.isQuerying = true
+    xhr.send()
   },
 
   isQuerying: false,
