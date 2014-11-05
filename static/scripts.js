@@ -119,7 +119,7 @@ window._EST_ = {
   updateTitle: function(title, id, callback) {
     title = encodeURIComponent(title)
     var xhr = new XMLHttpRequest()
-        xhr.open('GET', "http://localhost:7777/updatetitles/" + id + "/" + title, true)
+        xhr.open('GET', this.APIdomain + "/updatetitles/" + id + "/" + title, true)
 
         xhr.onload = function(e) {
           if (this.status == 200) {
