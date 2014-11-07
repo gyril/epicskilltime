@@ -3,3 +3,4 @@
 divshot.json
 
 .divshot-cache/**
+static/.divshot-cache/**
