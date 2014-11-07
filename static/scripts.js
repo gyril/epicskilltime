@@ -354,10 +354,11 @@ window._EST_ = {
       gateLink.className = 'game-gate-link'
       for (var i = 0; i < gif.tags.length; i++) {
         var tag = gif.tags[i]
-        if (tag.type == 'game')
+        if (tag.type == 'game') {
           gateLink.textContent = "Watch more gifs for " + tag.content
           gateLink.setAttribute('href', _EST_.domain+"/search.html?" + tag.content.replace(/ /g, "+"))
           break
+        }
       }
 
       return gateLink
