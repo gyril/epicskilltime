@@ -1,6 +1,6 @@
 {
   "name": "ggwp",
   "root": "./",
-  "clean_urls": true,
+  "clean_urls": false,
   "error_page": "error.html"
 }
