@@ -120,8 +120,6 @@ window._EST_ = {
     title = encodeURIComponent(title)
     var xhr = new XMLHttpRequest()
     xhr.open('GET', this.APIdomain + "/updatetitles/" + id + "/" + title, true)
-    //Send the proper header information along with the request
-    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
     xhr.onload = function(e) {
       if (this.status == 200) {
