@@ -105,13 +105,6 @@ input[type=text]:-ms-input-placeholder {
   opacity: 0.8;
 }
 
-#start_time {
-  width: 110px;
-}
-#length {
-  width: 140px;
-}
-
 fieldset select {
   line-height: 20px;
   font-size: 16px;
@@ -128,10 +121,6 @@ fieldset select {
 
 fieldset select.dimmed {
  color: rgba(64,66,65,0.8);
-}
-
-fieldset.float {
-  float: left;
 }
 
 .muted {
@@ -478,13 +467,6 @@ a.feedback:hover {
 
 .random_gif_video video {
   width: 640px;
-}
-
-.status {
-  font-size: 12px;
-  padding: 20px;
-  text-align: center;
-  width: 100%;
 }
 
 #footer {
