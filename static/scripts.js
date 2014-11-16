@@ -97,7 +97,7 @@ window._EST_ = {
   getHashtags: function() {
     var sTitle = document.getElementsByName('title')[0].value
     var $Tags = document.getElementsByName('free')[0]
-    var tags = sTitle.match(/\#[a-z0-9\-\_]*/ig)
+    var tags = sTitle.match(/\B\#[a-z0-9\-\_]+/ig)
     $Tags.value = (tags) ? tags.join(", ") : ""
   },
 
@@ -242,7 +242,7 @@ window._EST_ = {
       title.className = 'gif-list-title'
 
       title.textContent = gif.title
-      title.innerHTML = title.textContent.replace(/\#([a-z0-9\-\_]*)/ig, "<a href="+_EST_.domain+"/search.html?$1 class='gif-list-title-hashtag'>#$1</a>")
+      title.innerHTML = title.textContent.replace(/\B\#([a-z0-9\-\_]+)/ig, "<a href="+_EST_.domain+"/search.html?$1 class='gif-list-title-hashtag'>#$1</a>")
 
       return title
     },
